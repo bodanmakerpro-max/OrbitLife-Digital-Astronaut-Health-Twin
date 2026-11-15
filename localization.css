@@ -1,0 +1,13 @@
+
+/* Compact language selector, also available before crew login. */
+.ol-launch-preferences{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:wrap}
+.ol-launch-preferences label{color:#b8d5e1;font-size:11px;font-weight:700;letter-spacing:.01em}
+.ol-launch-preferences select{width:auto;min-width:120px;background:#10374b;color:#f1fcff;border:1px solid #397188;border-radius:8px;padding:7px 9px;font-size:12px}
+@media(max-width:680px){.ol-launch-preferences{justify-content:space-between;width:100%}.ol-launch-preferences .ol-launch-status{width:100%}}
+
+/* Keep the dark shared terminal readable even if the signed-in crew member uses Light theme. */
+.ol-launch-screen .ol-launch-description{color:#c7ddec!important}
+.ol-launch-screen .ol-launch-side p{color:#c5dce9!important}
+.ol-launch-screen .ol-launch-small{color:#c4d7e2!important}
+.ol-launch-screen .ol-launch-scan-visual span{color:#b7d7e6!important}
+.ol-launch-screen .ol-launch-footer{color:#adc9da!important}

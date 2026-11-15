@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>OrbitLife | Crew Command</title>
+<meta content="OrbitLife crew health: personal readings, daily check-ins, radiation exposure, food and nutrition, and mission medical support." name="description"/>
+<link href="app.css" rel="stylesheet"/><link href="developer-ui.css" rel="stylesheet"/><script defer="" src="app.js"></script><script defer="" src="terminal-ui.js"></script><link href="enhancements.css" rel="stylesheet"/><script defer="" src="enhancements.js"></script><link href="command-ui.css" rel="stylesheet"/><script defer="" src="command-ui.js"></script><link href="nutrition-ui.css" rel="stylesheet"/><link href="refined-ui.css" rel="stylesheet"/><script defer="" src="nutrition-ui.js"></script><script defer="" src="refined-ui.js"></script>
+<script defer src="developer-ui.js"></script><script defer src="welcome-esp.js"></script><link href="launch-ui.css" rel="stylesheet"/><script defer src="launch-ui.js"></script>
+<link href="alerts-ui.css" rel="stylesheet"/><link href="localization.css" rel="stylesheet"/>
+<script defer src="alerts-ui.js"></script><script defer src="localization.js"></script>
+</head>
+<body class="logged-out ol-launch-active">
+<div id="olLaunchScreen" class="ol-launch-screen" role="region" aria-label="OrbitLife Smart Mission Monitor start screen">
+ <section class="ol-launch-shell">
+  <div class="ol-launch-top"><div class="ol-launch-brand"><span class="ol-launch-brand-mark" aria-hidden="true">◎</span><span>OrbitLife / Smart Mission Monitor</span></div><div class="ol-launch-preferences"><label for="olGuestLanguage">Language</label><select id="olGuestLanguage" aria-label="Language before sign in"><option value="en">English</option><option value="mk">Македонски</option><option value="fr">Français</option><option value="ru">Русский</option></select><span class="ol-launch-status">MISSION SYSTEM READY</span></div></div>
+  <div class="ol-launch-main">
+   <div class="ol-launch-main-copy">
+    <div class="ol-launch-kicker">EXPEDITION 01 · CREW ACCESS TERMINAL</div>
+    <h1 class="ol-launch-title">Smart Mission<br/><span>Monitor.</span></h1>
+    <p class="ol-launch-description">One access point for crew health, the daily meal schedule and mission records. Touch the screen, use the rotary encoder or scan an RFID card.</p>
+    <div class="ol-launch-clock" id="olLaunchClock" aria-label="Local clock">--:--:--</div>
+    <div class="ol-launch-date" id="olLaunchDate">Loading date…</div>
+    <div id="olLaunchAlerts" class="ol-alerts-public hidden" aria-live="polite" aria-label="Mission emergency announcements"></div>
+    <div class="ol-launch-actions">
+     <button class="ol-launch-button ol-primary" type="button" id="olLaunchDashboard" data-launch-action="dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 9v12"/></svg><span>Access main dashboard</span><span class="ol-launch-action-arrow" id="olLaunchExpandIcon" aria-hidden="true">→</span>
+     </button>
+
+     <button class="ol-launch-button" id="olLaunchGuest" type="button" data-launch-action="food">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v7M9 3v7M5 7h4M7 10v11M17 3v18M17 3c-4 4-4 8 0 10"/></svg><span>Access without login<br/><small style="color:#b9d5e3;font-weight:500">Quickly check today's food</small></span><span class="ol-launch-action-arrow" aria-hidden="true">→</span>
+     </button>
+     <button class="ol-launch-button" id="olLaunchLogin" type="button" data-launch-action="login">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>Astronaut sign in</span><span class="ol-launch-action-arrow" aria-hidden="true">→</span>
+     </button>
+     <button class="ol-launch-button" id="olLaunchQuickAI" type="button" data-launch-action="quickai">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 9.5 9.5 2 12l7.5 2.5L12 22l2.5-7.5L22 12l-7.5-2.5z"/></svg><span>Ask OrbitLife Quick AI<br/><small>General questions · no login required</small></span><span class="ol-launch-action-arrow" aria-hidden="true">→</span>
+     </button>
+    </div>
+    <p class="ol-launch-small">Scan a paired RFID card for automatic sign-in. You can also use your password.</p>
+   </div>
+   <aside class="ol-launch-side" aria-label="Mission access status">
+    <div id="olLaunchStandardPanel">
+     <div class="ol-launch-subtitle">MISSION MONITOR</div><h2 id="olLaunchWelcomeTitle">Mission-ready interface</h2>
+     <p>Scan an RFID card to select an astronaut, or choose public access for the crew meal plan.</p>
+     <div class="ol-launch-scan-visual" aria-hidden="true"><div class="ol-scan-ring"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"><rect x="12" y="10" width="40" height="44" rx="7"/><path d="M21 23h12M21 30h10M38 20c6 6 6 18 0 24M44 17c8 9 8 21 0 30"/></svg></div><strong>SCAN RFID CARD</strong><span>or use the touchscreen to continue</span></div>
+    </div>
+    <div class="ol-launch-card" id="olLaunchCardPanel" aria-live="polite">
+     <div class="ol-launch-subtitle">CARD SCANNED · CHOOSE AN ACTION</div>
+     <div class="ol-launch-identity"><img id="olLaunchPhoto" src="portraits/AST-001.webp" alt="Selected astronaut portrait"/><div><strong id="olLaunchName">Bodan</strong><small id="olLaunchRole">Mission commander · AST-001</small></div></div>
+     <p class="ol-launch-card-note">Paired RFID cards sign in automatically. Choose a shortcut below.</p>
+     <div class="ol-launch-card-actions" id="olLaunchCardActions" aria-label="Quick actions, use encoder or touchscreen">
+       <button type="button" class="ol-launch-button" data-launch-action="emergency">Report emergency</button>
+       <button type="button" class="ol-launch-button" data-launch-action="food">Today's food</button>
+       <button type="button" class="ol-launch-button" data-launch-action="daily">Daily health check-in</button>
+       <button type="button" class="ol-launch-button" data-launch-action="radiation">Radiation exposure</button>
+       <button type="button" class="ol-launch-button" data-launch-action="body">Report symptoms</button>
+       <button type="button" class="ol-launch-button" data-launch-action="medications">Medications</button>
+       <button type="button" class="ol-launch-button" data-launch-action="records">Health records</button>
+       <button type="button" class="ol-launch-button" data-launch-action="assistant">Health AI assistant</button>
+       <button type="button" class="ol-launch-button" data-launch-action="dashboard">Main dashboard</button>
+       <button type="button" class="ol-launch-button ol-primary" data-launch-action="login">Open my profile</button>
+     </div>
+    </div>
+    <div class="ol-launch-side-foot"><span class="ol-launch-tag">8 CREW PROFILES</span><span class="ol-launch-tag">USB RFID + OLED</span><span class="ol-launch-tag">TOUCH + ENCODER</span></div>
+   </aside>
+  </div>
+  <details class="ol-launch-alltools" id="olLaunchTools">
+   <summary>All OrbitLife mission tools <span>Explore the complete software</span></summary>
+   <div class="ol-launch-tools-grid" aria-label="All mission tools">
+    <button type="button" data-launch-action="personal">My astronaut dashboard</button>
+    <button type="button" data-launch-action="daily">Daily health check-in</button>
+    <button type="button" data-launch-action="wearables">Wearable health data</button>
+    <button type="button" data-launch-action="radiation">Radiation tracking</button>
+    <button type="button" data-launch-action="cortisol">Cortisol tracking</button>
+    <button type="button" data-launch-action="body">Symptoms and body map</button>
+    <button type="button" data-launch-action="medications">Medications</button>
+    <button type="button" data-launch-action="nutrition">Meals and nutrition</button>
+    <button type="button" data-launch-action="records">Search medical records</button>
+    <button type="button" data-launch-action="assistant">Personal health AI</button>
+    <button type="button" data-launch-action="emergency">Emergency information</button>
+    <button type="button" data-launch-action="quickai">General Quick AI · no login</button>
+   </div>
+   <p class="ol-launch-tools-note">Private health pages require an astronaut login or a paired RFID card. Quick AI is general and does not read personal records.</p>
+  </details>
+  <details class="ol-esp-setup" id="olEspSetup">
+   <summary><span>USB / ESP32 Connection</span><span id="olEspStatus" class="ol-esp-pill" role="status" aria-live="polite">Checking USB connection...</span></summary>
+   <form class="ol-esp-form" id="olEspForm">
+    <label for="olEspPort">ESP32 USB port (COM)</label>
+    <input id="olEspPort" list="olEspPortList" autocomplete="off" placeholder="COM4" spellcheck="false" aria-describedby="olEspHelp" />
+    <datalist id="olEspPortList"></datalist>
+    <button class="ol-esp-btn" id="olEspConnect" type="submit">Connect</button>
+    <button class="ol-esp-btn alt" id="olEspDisconnect" type="button">Disconnect</button>
+    <button class="ol-esp-btn alt" id="olEspRefresh" type="button">Refresh ports</button>
+    <p id="olEspHelp" class="ol-esp-help">Plug in the ESP32, close Arduino Serial Monitor and select its COM port. USB Serial · 115200 baud.</p>
+    <p id="olEspMessage" class="ol-esp-message" aria-live="polite"></p>
+   </form>
+  </details>
+  <div class="ol-launch-footer"><span>ORBITLIFE · CREW HEALTH</span><span id="olLaunchZone">Local time</span><span>USB ACCESS · OLED + TOUCH</span></div>
+ </section>
+</div>
+
+<div class="app">
+<aside class="sidebar" id="olSidebar">
+<div class="brand"><div class="logo">◎</div><div><div class="brand-title">Orbit<span>Life</span></div><div class="brand-sub">MISSION HEALTH PORTAL</div></div></div>
+<button aria-controls="navigation" aria-label="Collapse sidebar" aria-pressed="false" class="ol-sidebar-toggle" id="olSidebarToggle" title="Collapse sidebar" type="button"><span aria-hidden="true" class="ol-toggle-icon">←</span><span class="ol-toggle-label">Collapse menu</span></button>
+<button aria-controls="navigation" aria-expanded="false" class="mobile-menu-toggle" id="mobileMenuToggle" type="button">☰ Menu</button>
+<nav aria-label="Mission navigation" class="grouped-nav" id="navigation">
+<button class="navitem active" data-view="crew"><b>⌂</b> <span>Home &amp; crew</span></button><button class="navitem" data-view="menu"><b>◈</b> Today’s food</button>
+<button class="navitem private" data-view="personal"><b>◉</b> My dashboard</button>
+<button class="navitem private" data-view="daily"><b>▤</b> Daily check-in</button>
+<button class="navitem private" data-view="wearables"><b>⌚</b> Wearable health</button><button class="navitem private" data-view="records"><b>▤</b> Records search</button>
+<details class="nav-group" open=""><summary><span>Health tracking</span><span class="nav-count">4 tools</span></summary>
+<button class="navitem private" data-view="radiation"><b>☢</b> Radiation exposure</button>
+<button class="navitem private" data-view="cortisol"><b>◈</b> Cortisol</button>
+<button class="navitem private" data-view="body"><b>♧</b> Symptoms &amp; body map</button>
+<button class="navitem private" data-view="medications"><b>✚</b> Medications</button>
+<button class="navitem private" data-view="nutrition"><b>◈</b> Meals &amp; nutrition</button>
+</details>
+<details class="nav-group"><summary><span>Safety &amp; assistance</span><span class="nav-count">2 tools</span></summary>
+<button class="navitem private" data-view="emergency"><b>⚑</b> Emergency details</button>
+<button class="navitem private" data-view="assistant"><b>✧</b> AI health assistant</button>
+</details>
+<details class="nav-group"><summary><span>Account</span><span class="nav-count">2 tools</span></summary>
+<button class="navitem private" data-view="crewprofile"><b>♙</b> My crew profile</button>
+<button class="navitem private" data-view="settings"><b>⚙</b> Settings</button>
+<button class="navitem private ol-dev-nav hidden" id="devNav" data-view="developer" title="Commander only"><b>⌘</b> Developer Tools</button>
+</details>
+</nav>
+<div class="sidebar-bottom"><button class="ol-sidebar-welcome" id="olSidebarWelcome" type="button">← Back to Welcome Page</button><div class="eyebrow">MISSION SYSTEM</div><p>Local crew health records</p><div class="tiny-tag" id="aiSidebar">ASSISTANT READY</div><button class="sidebar-info-link" id="openResearchFromSidebar" type="button">Research &amp; data notes ↗</button></div>
+</aside>
+<main class="main">
+<header class="header">
+<div class="public-brand" id="publicBrand"><div class="public-logo">◎</div><div><div class="public-brand-name">Orbit<span>Life</span></div><div class="public-brand-kicker">CREW HEALTH PLATFORM</div></div></div>
+<div class="breadcrumb" id="appBreadcrumb">MISSION / <span id="crumb">CREW OVERVIEW</span></div>
+<div class="header-right"><button class="button secondary ol-header-ai hidden" id="olHeaderAI" title="Ask OrbitLife Quick AI" type="button">✦ <span>Quick AI</span></button><button class="ol-return-monitor hidden" id="olReturnMonitor" type="button">← Back to Welcome</button><nav aria-label="Public navigation" class="public-nav" id="publicNav"><button data-public-target="view-crew" type="button">Mission</button><button data-public-target="crewGrid" type="button">Meet the crew</button><span>EXPEDITION 01</span></nav><span class="statusdot"></span><span id="loginStatus">EXPEDITION 01</span><img alt="Logged-in astronaut portrait" class="header-portrait hidden" id="headerPortrait"/><button class="button primary" id="loginBtn">Crew sign in →</button><button class="button ghost hidden" id="logoutBtn">Log out</button></div>
+</header>
+<div aria-live="polite" class="notice hidden" id="message" role="status"></div><div class="terminal-connection hidden" id="terminalConnection" role="status">ESP32 terminal connected</div>
+<section class="view active" id="view-crew">
+<div id="olHomeAlerts" class="ol-alerts-public hidden" aria-live="polite" aria-label="Mission emergency announcements"></div>
+<div aria-live="polite" class="hidden" id="olActiveIncidents"></div>
+<div class="hero portal-hero"><div class="portal-hero-copy"><div class="eyebrow">EXPEDITION 01 / MISSION MEDICAL</div><h1>One mission.<br/><em>Eight lives to protect.</em></h1><p>Stay on top of crew health, follow-up actions, and daily check-ins. Sign in to access your private astronaut health record.</p><div class="hero-buttons"><button class="button primary" id="heroLoginBtn">Access crew portal →</button><span class="portal-secure">● PRIVATE CREW ACCESS</span></div><div class="hero-bottom"><span>8 CREW PROFILES</span><span>DAILY HEALTH LOGS</span><span>PERSONAL HEALTH TRENDS</span></div></div><div class="hero-art"><div class="orbit-track orbit-track-a"></div><div class="orbit-track orbit-track-b"></div><div class="hero-symbol">✦</div><div class="hero-faces" id="heroFaces"></div><div class="hero-art-label">CREW / EXPEDITION 01</div></div></div>
+<div class="ol-home-workspace ol-home-refined" id="olHomeWorkspace"><section aria-label="Main mission actions" class="ol-home-entry">
+<button class="ol-entry-tile" data-ol-open="menu" type="button"><span class="ol-entry-icon">◈</span><span><strong>Today's food</strong><small>Breakfast, lunch, dinner and snacks for every astronaut</small></span><span class="ol-entry-arrow">→</span></button>
+<button class="ol-entry-tile" data-ol-open="daily" type="button"><span class="ol-entry-icon">▤</span><span><strong>Daily check-in</strong><small>Enter today's health measurements</small></span><span class="ol-entry-arrow">→</span></button>
+<button class="ol-entry-tile" data-ol-open="records" type="button"><span class="ol-entry-icon">▦</span><span><strong>Find records</strong><small>Search past readings by date and topic</small></span><span class="ol-entry-arrow">→</span></button>
+</section>
+<details class="ol-home-tools" id="olHomeTools">
+ <summary>Explore all mission tools <span>AI, health, safety, records and more</span></summary>
+ <div class="ol-home-tools-grid">
+  <button data-ol-open="personal" type="button">My dashboard</button>
+  <button data-ol-open="wearables" type="button">Wearables</button>
+  <button data-ol-open="radiation" type="button">Radiation</button>
+  <button data-ol-open="cortisol" type="button">Cortisol</button>
+  <button data-ol-open="body" type="button">Symptoms &amp; body map</button>
+  <button data-ol-open="medications" type="button">Medications</button>
+  <button data-ol-open="nutrition" type="button">Meals &amp; nutrition</button>
+  <button data-ol-open="records" type="button">Search records</button>
+  <button data-ol-open="assistant" type="button">Personal health AI</button>
+  <button data-ol-open="emergency" type="button">Emergency information</button>
+  <button data-ol-open="crewprofile" type="button">Crew profile</button>
+  <button data-ol-open="quickai" type="button">Open Quick AI</button>
+ </div>
+</details></div>
+<div class="hidden" id="olCrewCommandBar"></div>
+<div class="page-head"><div><div class="eyebrow">MEET YOUR CREW</div><h2>Mission health overview</h2><p>View crew status, priority actions and latest check-ins. Select an astronaut for more details.</p></div><button class="button secondary" id="refreshCrew">Refresh status ↻</button></div>
+<div class="quickstrip private-shortcuts hidden" id="quickActions"><span>QUICK ACTIONS</span><button data-goto="daily">+ New check-in</button><button data-goto="radiation">☢ Record radiation</button><button data-goto="body">Report symptom</button><button data-goto="wearables">⌚ Wearable feed</button><button data-goto="assistant">Ask OrbitLife AI</button></div>
+<div class="summary-row" id="summaryRow"></div>
+<div class="crew-toolbar"><label for="crewSearch">Find crew member <input autocomplete="off" id="crewSearch" placeholder="Search name or ID..." type="search"/></label><div aria-label="Filter crew status" class="crew-filters" id="crewFilters" role="group"><button class="selected" data-crew-filter="all" type="button">All crew</button><button data-crew-filter="green" type="button">On track</button><button data-crew-filter="amber" type="button">Needs review</button><button data-crew-filter="red" type="button">Critical / urgent</button></div></div>
+<div class="crew-grid" id="crewGrid"></div>
+<details class="terminal-pair panel hidden" id="terminalPairPanel"><summary>RFID terminal · Pair a new astronaut card</summary>
+<p class="fine">Scan a card at the ESP32 terminal. Then assign it to an astronaut. A card only selects an account; the astronaut still enters a password on screen.</p>
+<div class="terminal-pair-controls"><span id="terminalPairStatus">Waiting for a card...</span><select aria-label="Astronaut to pair" id="terminalPairAstronaut"></select><button class="button secondary" id="terminalPairRefresh" type="button">Find card</button><button class="button primary" id="terminalPairSave" type="button">Pair card</button></div></details>
+</section><section class="view" id="view-menu"><div class="page-head"><div><div class="eyebrow">MISSION GALLEY</div><h1>Today's food</h1><p>Select a meal and tap an astronaut to see ingredients and nutrition. Sign in to confirm what you ate.</p></div><button class="button secondary" data-ol-open="crew" type="button">← Home</button></div><section aria-labelledby="olMenuHeading" class="panel ol-menu-panel">
+<div class="ol-section-header"><div><div class="eyebrow">MISSION GALLEY / SHARED CREW VIEW</div><h2 id="olMenuHeading">Today’s Menu</h2><p>Daily meals for the full crew, adjusted to the duty roster.</p></div><div class="ol-menu-date"><button class="button secondary" id="olMenuToday" type="button">Today</button><button class="button secondary" id="olMenuTomorrow" type="button">Tomorrow</button><label class="ol-date-label">Date<input aria-label="Menu date" id="olMenuDate" type="date"/></label></div></div>
+<div aria-label="Show meal type" class="ol-menu-pills" id="olMenuTabs" role="group"><button class="selected" data-slot="Breakfast">Breakfast</button><button data-slot="Lunch">Lunch</button><button data-slot="Dinner">Dinner</button><button data-slot="Snack">Snacks</button><button data-slot="All">Full day</button></div>
+<div aria-live="polite" class="ol-menu-overview" id="olMenuOverview"></div>
+<div class="ol-menu-grid" id="olMenuGrid"><p>Loading today’s mission menu…</p></div>
+<p class="fine">Public meal plans show scheduled food, not proof of consumption. Food and nutrient values are illustrative, and the galley list is not live inventory.</p>
+</section></section><section class="view" id="view-records">
+<div class="page-head"><div><div class="eyebrow">CREW HEALTH HISTORY</div><h1>All records</h1><p>Find past health measurements and reports in one place.</p></div><span class="id-pill">PRIVATE RECORDS</span></div>
+<div class="panel ol-record-panel"><form class="ol-record-filters" id="olRecordForm">
+<label>Topic<select id="olRecordTopic"><option value="all">All topics</option><option value="daily">Daily check-ins</option><option value="wearable">Wearable readings</option><option value="nutrition">Food and calories</option><option value="radiation">Radiation</option><option value="symptoms">Symptoms</option><option value="medications">Medications</option><option value="cortisol">Cortisol</option><option value="incidents">Incidents</option></select></label>
+<label>From<input id="olRecordFrom" type="date"/></label><label>To<input id="olRecordTo" type="date"/></label>
+<button class="button primary" type="submit">Search records</button><button class="button secondary" id="olRecordClear" type="button">All dates</button>
+</form><p aria-live="polite" class="ol-record-results-count" id="olRecordCount">Choose dates and a topic, or search all records.</p>
+<div class="ol-record-results" id="olRecordResults"></div></div>
+</section>
+<section class="view" id="view-personal">
+<div class="page-head personal-identity"><div class="personal-identity-left"><img alt="Astronaut profile portrait" class="personal-portrait" id="personalPortrait"/><div><div class="eyebrow">DIGITAL ASTRONAUT IDENTITY</div><h1 id="personalTitle">Personal mission dashboard</h1><p>Your latest readings, health trends and personal follow-up actions.</p></div></div><span class="id-pill" id="personalId"></span></div>
+<div class="adminbar hidden" id="adminSelectWrap"><label for="adminTarget">Mission administrator: review astronaut</label><select id="adminTarget"></select><span>Private records are visible to the mission administrator.</span></div>
+<div id="olPersonalEmergency"></div>
+<div class="metrics" id="personalMetrics"></div>
+<div class="panel ol-timeline" id="olPersonalTimeline"><div class="panel-heading"><h3 data-i18n="Medical timeline">Medical timeline</h3><span data-i18n="Latest incidents">Latest incidents</span></div><div id="olTimelineList"></div></div>
+<div class="two-col"><div class="panel"><div class="panel-heading"><h3>Recent health readings</h3><label class="trend-select-label">Chart <select aria-label="Choose health metric" id="trendMetric"><option value="sleep">Sleep · h</option><option value="hr">Resting heart rate · bpm</option><option value="mass">Body mass · kg</option><option value="temperature_c">Body temperature · °C</option><option value="glucose_mgdl">Blood glucose · mg/dL</option><option value="exercise">Exercise · min</option><option value="water">Water · L</option></select></label></div><div class="trend" id="dailyTrend"></div></div>
+<div class="panel"><div class="panel-heading"><h3>Bone health reference</h3><span>Population model · not a scan</span></div><div class="bone-row"><div class="bone-ring" id="boneRing"><div><strong id="boneValue">--</strong><small>BASELINE %</small></div></div><div><b id="boneRange">Bone trend reference</b><p id="boneText">Reference model based on published spaceflight research.</p></div></div></div></div>
+<div class="two-col"><div class="panel"><div class="panel-heading"><h3>Simulation lab</h3><span>Change daily habits</span></div><p class="fine">Compare proposed sleep and activity targets with current readings.</p><label>Sleep target <strong id="simSleepLabel">8 h</strong></label><input id="simSleep" max="10" min="4" step="0.5" type="range" value="8"/><label>Exercise target <strong id="simExerciseLabel">45 min</strong></label><input id="simExercise" max="120" min="0" step="5" type="range" value="45"/><div class="result" id="simResult"></div></div>
+<div class="panel"><div class="panel-heading"><h3>Current follow-up actions</h3><span>From latest records</span></div><div id="personalActions"></div><button class="button primary" data-goto="daily">Enter today's readings</button></div></div>
+</section>
+<section class="view" id="view-wearables">
+<div class="page-head"><div><div class="eyebrow">AUTOMATED PHYSIOLOGICAL DATA</div><h1>Wearable health</h1><p>Sleep, activity and recovery trends for the selected crew member.</p></div><span class="id-pill">WEARABLE FEED</span></div>
+<div class="wearable-notice"><div><b>Simulated Garmin-style feed</b><p>These records are generated locally for the crew scenario. No Garmin watch or Garmin Connect account is connected.</p></div><span class="source-flag" id="wearSourceBadge">SYNTHETIC DATA</span></div>
+<div class="wearables-toolbar"><div class="wearable-profile-card"><img alt="Crew member" id="wearablePortrait" src="portraits/AST-001.webp"/><div><b id="wearableName">Astronaut</b><small id="wearableSubtitle">AST-001 · Fictional wellness feed</small></div></div><div class="wearable-controls"><button class="button primary" id="syncWearable" type="button">↻ Refresh simulated feed</button><label class="button secondary file-upload">Import JSON records<input accept="application/json,.json" id="wearableImport" type="file"/></label></div></div>
+<div class="metrics wearable-metrics" id="wearableMetrics"></div>
+<div class="two-col wearable-main"><div class="panel"><div class="panel-heading"><h3>30-day wearable trends</h3><label class="trend-select-label">Show <select id="wearableTrendMetric"><option value="sleep_hours">Sleep hours</option><option value="resting_hr">Resting heart rate</option><option value="steps">Steps</option><option value="stress_score">Stress</option><option value="body_battery">Body Battery-style</option><option value="active_minutes">Active minutes</option><option value="hrv_ms">HRV estimate</option></select></label></div><div class="wearable-legend"><span><i class="dot-synthetic"></i> Simulated</span><span><i class="dot-imported"></i> Imported</span></div><div class="wearable-chart" id="wearableChart"></div><p class="fine">Trend values describe fictional crew members. Garmin connection and health assessment are not active.</p></div><div class="panel"><div class="panel-heading"><h3>Personal patterns</h3><span>Selected astronaut</span></div><div id="wearableHabits"></div><button class="button secondary" data-goto="crewprofile" type="button">Open detailed crew profile</button></div></div>
+<details class="panel ol-wearable-disclosure"><summary class="ol-wearable-summary"><h3>Wearable records</h3><span>Most recent measurements</span></summary><div class="table-scroll"><table class="wearable-table"><thead><tr><th>Day</th><th>Source</th><th>Sleep</th><th>HR</th><th>Steps</th><th>Stress</th><th>Battery</th><th>Activity</th></tr></thead><tbody id="wearableRows"></tbody></table></div></details>
+<details class="info-disclosure wearable-connect-info"><summary>How to connect a real Garmin watch in the future</summary><p>Real automatic account-based Garmin Connect synchronization requires a Garmin Developer Program integration and each astronaut's approval. OrbitLife currently supports synthetic readings and import of normalized JSON records. The Personal API is not intended for multi-user services.</p><p>Import JSON format: an array of records, for example <code>[{"date":"2026-11-14","sleep_hours":7.5,"resting_hr":62,"steps":8500,"stress_score":27}]</code>. Imported values are not automatically verified as Garmin data. Existing hand-entered daily check-ins are never overwritten.</p><a href="https://developer.garmin.com/gc-developer-program/overview/" rel="noopener noreferrer" target="_blank">Official Garmin developer program ↗</a></details>
+</section>
+<section class="view" id="view-crewprofile">
+<div class="page-head"><div><div class="eyebrow">ASTRONAUT DIGITAL ID</div><h1>Crew profile</h1><p>Identity, experience, individual strengths and everyday mission habits.</p></div><span class="id-pill">PERSONAL PROFILE</span></div>
+<div class="profile-top panel"><img alt="Crew member" id="crewBioPortrait" src="portraits/AST-001.webp"/><div><div class="eyebrow" id="crewBioId">AST-001</div><h2 id="crewBioName">Crew member</h2><p id="crewBioRole">Flight role</p><div class="profile-tags" id="crewBioTags"></div><p class="profile-description" id="crewBioDescription"></p></div></div>
+<div class="two-col form-layout"><div class="panel"><div class="panel-heading"><h3>Personal information</h3><span>Private crew record</span></div><div class="profile-facts" id="crewBioFacts"></div><div class="profile-note">Demographic details are fictional profile information only. They are not used to calculate medical risk.</div></div><div class="panel"><div class="panel-heading"><h3>Edit profile</h3><span>Account holder or commander</span></div><form class="fields" id="crewBioForm"><label>Date of birth<input name="dob" type="date"/></label><label>Gender<input maxlength="140" name="gender" placeholder="Self-described"/></label><label>Race / ethnicity<input maxlength="140" name="heritage" placeholder="Self-described"/></label><label>Nationality<input maxlength="140" name="nationality"/></label><label class="wide">Known strengths / personal perks<textarea maxlength="500" name="strengths" rows="2"></textarea></label><label class="wide">About the astronaut<textarea maxlength="500" name="bio" rows="3"></textarea></label><label class="wide">Favorite foods<input maxlength="140" name="favorite_foods"/></label><label class="wide">Daily eating pattern<textarea maxlength="500" name="food_pattern" rows="2"></textarea></label><button class="button primary wide" type="submit">Save crew profile</button></form></div></div>
+</section>
+<section class="view" id="view-daily"><div class="page-head"><div><div class="eyebrow">EVERY MISSION DAY COUNTS</div><h1>Daily health check-in</h1><p>Record vitals, daily activity, sleep and how you feel. Your trends update as soon as you save.</p></div><span class="id-pill">DAILY RECORD</span></div><details class="info-disclosure measurement-guide"><summary>How to take and record these measurements</summary><div class="guide-grid"><div><b>Heart rate &amp; blood pressure</b><p>Use the approved monitoring device and record readings after resting, following the mission measurement routine.</p></div><div><b>Body temperature</b><p>Use an onboard thermometer. Check unexpected readings again and note any symptoms.</p></div><div><b>Blood glucose</b><p>Use an approved testing device, record mg/dL, and select whether the reading was before or after eating.</p></div><div><b>Body mass in microgravity</b><p>SLAMMD measures mass using a known force and resulting acceleration. Enter the device result in kg.</p></div></div></details>
+<div class="two-col form-layout"><div class="panel"><h3>Record today's measurements</h3><form class="fields" id="dailyForm">
+<label>Date<input id="dailyDate" name="date" required="" type="date"/></label><label>Sleep (hours)<input max="24" min="0" name="sleep" placeholder="7.5" step="0.1" type="number"/></label>
+<label>Resting heart rate (bpm)<input max="240" min="20" name="hr" placeholder="68" type="number"/></label><label>Oxygen SpO₂ (%)<input max="100" min="50" name="spo2" placeholder="98" step="0.1" type="number"/></label>
+<label>Systolic blood pressure<input max="250" min="60" name="systolic" placeholder="120" type="number"/></label><label>Diastolic blood pressure<input max="160" min="30" name="diastolic" placeholder="80" type="number"/></label>
+<label>Body mass (kg)<input max="300" min="20" name="mass" placeholder="Measured body mass" step="0.1" type="number"/></label><label>Mass measurement method<select name="mass_method"><option value="">Not recorded</option><option value="SLAMMD">SLAMMD mass measuring device</option><option value="Other inertial mass device">Other inertial mass device</option><option value="Imported mission record">Imported mission record</option></select></label><label>Body temperature (°C)<input max="45" min="25" name="temperature_c" placeholder="36.8" step="0.1" type="number"/></label><label>Blood glucose (mg/dL)<input max="600" min="20" name="glucose_mgdl" placeholder="Measured value" step="0.1" type="number"/></label><label>Glucose timing<select name="glucose_context"><option value="">Not recorded</option><option value="Fasting">Fasting</option><option value="Before meal">Before meal</option><option value="After meal">After meal</option><option value="Other / unknown">Other / unknown</option></select></label><label>Exercise (min)<input max="500" min="0" name="exercise" placeholder="45" type="number"/></label>
+<label>Water consumed (L)<input max="12" min="0" name="water" placeholder="2.0" step="0.1" type="number"/></label><label>Mood<select name="mood"><option value="Good">Good</option><option value="Okay">Okay</option><option value="Low">Low</option><option value="Anxious">Anxious</option><option value="Energetic">Energetic</option></select></label>
+<label>Stress (1 low to 5 high)<select name="stress"><option>1</option><option selected="">2</option><option>3</option><option>4</option><option>5</option></select></label><label>Fatigue (1 low to 5 high)<select name="fatigue"><option>1</option><option selected="">2</option><option>3</option><option>4</option><option>5</option></select></label>
+<label class="wide">Daily notes<textarea name="notes" placeholder="Energy, activity, anything different today..." rows="3"></textarea></label><button class="button primary wide" type="submit">Save today's check-in</button>
+<p class="fine wide mass-info">On the ISS, body mass can be measured with SLAMMD, an instrument based on force and acceleration. Enter the instrument value, not a conventional scale weight. <a href="https://www.nasa.gov/missions/station/iss-research/crew-8-concludes-space-station-scientific-mission/" rel="noopener noreferrer" target="_blank">NASA reference ↗</a></p></form></div><div class="panel"><div class="panel-heading"><h3>Saved check-ins</h3><span>Most recent first</span></div><div id="dailyHistory"></div></div></div>
+</section>
+<section class="view" id="view-radiation">
+<div class="page-head"><div><div class="eyebrow">ENVIRONMENTAL HEALTH / DOSIMETRY</div><h1>Radiation exposure</h1><p>Recorded dose and dose-rate readings, with source tracking and trends.</p></div><span class="id-pill">INSTRUMENT / MANUAL ENTRIES</span></div>
+<div class="measurement-source"><div><b>Dosimeter data</b><p>Enter values from a radiation monitor or import a dosimeter report. Dose and dose rate are shown separately.</p></div><span class="sensor-disconnected">SENSOR NOT CONNECTED</span></div>
+<div class="rad-stats" id="radiationMetrics"><div class="rad-stat"><small>Logged mission dose</small><strong>—</strong><p>mSv</p></div></div>
+<div class="two-col rad-workspace">
+<div class="panel"><div class="panel-heading"><h3>Record a dosimeter reading</h3><span>Manual or instrument data</span></div>
+<form class="fields" id="radiationForm">
+<label class="wide">Measurement time (local)<input id="radiationTime" name="measured_at" required="" type="datetime-local"/></label>
+<label>Incremental dose (mSv)<input max="1000" min="0" name="dose_msv" placeholder="0.35" step="0.0001" type="number"/></label>
+<label>Dose rate (µSv/h)<input max="100000" min="0" name="rate_usvh" placeholder="18.5" step="0.001" type="number"/></label>
+<label>Data source<select name="source"><option value="Manual dosimeter reading">Manual dosimeter reading</option><option value="Imported dosimeter log">Imported dosimeter log</option><option value="Training / simulated data">Training / simulated data</option></select></label>
+<label>Location / activity<input maxlength="100" name="location" placeholder="Habitat module / EVA"/></label>
+<label class="wide">Measurement notes<textarea maxlength="500" name="notes" placeholder="Instrument, measurement period, calibration, shielding... " rows="2"></textarea></label>
+<p class="fine wide">Incremental dose is the dose received during a measured interval. Don't enter an already cumulative total here or the app will count it again. A rate alone does not add to the total. Do not enter overlapping intervals.</p>
+<button class="button primary wide" type="submit">Save radiation measurement</button>
+</form>
+</div>
+<div class="panel"><div class="panel-heading"><h3>Radiation dose history</h3><span>Dosimeter log</span></div><div aria-label="Recent interval doses chart" class="radiation-chart" id="radiationTrend"></div><div class="result" id="radiationGuidance"></div>
+<div class="rad-import"><h3>Import / export</h3><p class="fine">Import a CSV from a dosimeter export, or download recorded entries.</p><label class="file-upload">Choose CSV file<input accept=".csv,text/csv" id="radiationCsv" type="file"/></label><div class="rad-actions"><button class="button secondary" id="importRadiation" type="button">Import CSV</button><button class="button ghost" id="exportRadiation" type="button">Export CSV</button></div><p class="fine">CSV columns: measured_at, dose_msv, rate_usvh, source, location, notes. Import max 200 rows at once.</p></div>
+</div>
+</div>
+<div class="two-col">
+<div class="panel"><div class="panel-heading"><h3>Previous career dose</h3><span>Optional prior records</span></div><p class="fine">If earlier missions have documented effective doses, enter their total. Leave blank when unknown; it will not be treated as zero.</p><form class="rad-baseline-form" id="radiationBaselineForm"><label>Prior career effective dose (mSv)<input max="100000" min="0" name="career_baseline_msv" placeholder="Unknown" step="0.001" type="number"/></label><button class="button secondary" type="submit">Save previous dose</button></form><div class="result" id="radiationCareer"></div></div>
+<div class="panel"><div class="panel-heading"><h3>Recent readings</h3><span>Private astronaut record</span></div><div id="radiationHistory"></div></div>
+</div>
+<details class="info-disclosure"><summary>Understand radiation measurements</summary><p>OrbitLife displays values from a dosimeter or imported record. It does not detect radiation itself. Only distinct interval doses are added to the logged total; dose-rate readings cannot be added without a validated time interval. The application does not determine personal radiation safety. <a href="https://www.nasa.gov/reference/4-0-human-performance/" rel="noopener noreferrer" target="_blank">NASA radiation standards ↗</a></p></details>
+</section>
+<section class="view" id="view-body"><div class="page-head"><div><div class="eyebrow">REPORT A MEDICAL CONCERN</div><h1>Where does it hurt?</h1><p>Select a body area, describe your symptoms, and get a cautious list of possible explanations and warning signs.</p></div></div>
+<div class="two-col body-layout"><div class="panel body-panel"><div class="panel-heading"><h3>Interactive body map</h3><div class="segmented"><button class="seg active" data-side="front">Front</button><button class="seg" data-side="back">Back</button></div></div><div aria-label="Interactive body area diagram" class="body-drawing" id="bodyDrawing"></div><p class="fine center">Select a highlighted area of the body to describe a problem.</p></div>
+<div class="panel"><div class="panel-heading"><h3>Symptom report</h3><span>Private to this astronaut</span></div><div class="selected-area"><span>SELECTED AREA</span><strong id="chosenRegion">None selected</strong></div><form class="fields single" id="symptomForm">
+<input id="symptomRegion" name="region" type="hidden"/><label>Severity (1 mild to 5 severe)<select name="severity" required=""><option value="1">1 · Mild</option><option value="2">2 · Noticeable</option><option selected="" value="3">3 · Moderate</option><option value="4">4 · Significant</option><option value="5">5 · Severe</option></select></label>
+<label>When did it begin?<input name="onset" placeholder="e.g. This morning after exercise"/></label><label>Describe what you feel<textarea name="notes" placeholder="Type of pain, timing, other symptoms..." required="" rows="5"></textarea></label><button class="button primary" type="submit">Save symptom and analyze</button>
+</form><div class="result hidden" id="bodyFeedback"></div><button class="button secondary" disabled="" id="askBodyAI">Ask the AI about this area</button><div class="disclaimer">Severe symptoms need an immediate crew medical review.</div></div></div>
+<div class="panel"><div class="panel-heading"><h3>Previous symptom reports</h3><span>Most recent first</span></div><div id="symptomHistory"></div></div>
+</section>
+<section class="view" id="view-medications"><div class="page-head"><div><div class="eyebrow">CREW MEDICAL RECORD</div><h1>Medication log</h1><p>Record prescribed or approved medicines and whether they were taken today. This app does not prescribe treatments.</p></div></div>
+<div class="two-col form-layout"><div class="panel"><h3>Add a medication</h3><form class="fields single" id="medForm"><label>Medication name<input name="name" placeholder="Name on the medication label" required=""/></label><label>Approved schedule<input name="schedule" placeholder="e.g. Per medical officer's plan"/></label><label>Instructions / notes<textarea name="instructions" placeholder="Only instructions provided by your medical officer" rows="3"></textarea></label><button class="button primary" type="submit">Add medication</button></form></div><div class="panel"><div class="panel-heading"><h3>Current medications</h3><span>Personal record</span></div><div id="medList"></div></div></div>
+</section>
+<section class="view" id="view-nutrition"><div class="page-head"><div><div class="eyebrow">NUTRITION TRACKING</div><h1>Food and dietary log</h1><p>Choose from ISS-documented foods, then record meals, appetite and energy intake.</p></div></div>
+<div class="panel ol-nutrition-planner"><div class="ol-section-header"><div><div class="eyebrow">AUTOMATED NUTRITION</div><h2>My daily nutrition report</h2><p>Meals are scheduled for you. Confirm what you actually eat to add it to your medical nutrition record.</p></div><div class="ol-menu-date"><label class="ol-date-label">Report date<input id="olNutritionDay" type="date"/></label><button class="button secondary" id="olNutritionRefresh" type="button">Refresh</button></div></div><div class="ol-macro-stats" id="olNutritionStats"></div><div class="ol-nutrition-meals" id="olNutritionMeals"></div><p class="fine">Only confirmed meals count as eaten. Macros are food-library estimates and do not replace medical nutrition review.</p></div>
+<div class="two-col ol-nutrition-manage">
+<div class="panel ol-workload-panel hidden" id="olWorkloadPanel"><h3>Plan tomorrow’s workload</h3><p>Commander and medical team: assign light, normal, heavy or EVA work to adapt the menu.</p><form class="fields single" id="olWorkloadForm"><label>Astronaut<select id="olWorkloadCrew"></select></label><label>Date<input id="olWorkloadDate" required="" type="date"/></label><label>Workload<select id="olWorkloadValue"><option value="light">Light day</option><option value="normal">Normal day</option><option value="heavy">Heavy work</option><option value="eva">EVA</option></select></label><label>EVA duration (hours)<input id="olEvaHours" max="12" min="0" step="0.5" type="number" value="0"/></label><label>Mission note<input id="olWorkloadNote" maxlength="160" placeholder="Equipment maintenance, EVA tasks, etc."/></label><button class="button primary" type="submit">Update meal plan</button></form></div>
+<div class="panel"><h3>Report suspected food-related illness</h3><p>Record symptoms and onset so the medical team can compare confirmed meals.</p><form class="fields single" id="olFoodIllnessForm"><label>Symptoms started<input id="olFoodOnset" required="" type="datetime-local"/></label><label>What happened?<textarea id="olFoodIllnessText" maxlength="550" placeholder="Describe symptoms and onset. This does not prove a food caused them." required="" rows="2"></textarea></label><button class="button secondary" type="submit">Record for medical review</button></form></div>
+</div>
+<div class="panel ol-investigate hidden" id="olFoodInvestigation"><div class="ol-section-header"><div><h3>Medical food-exposure review</h3><p>Review shared items in confirmed meals, then hold a suspected food from upcoming menus while it is checked.</p></div><button class="button secondary" id="olRefreshFoodReview" type="button">Review cases</button></div><div id="olFoodReviewResults"></div><form class="ol-inline-form" id="olFoodHoldForm"><label>Food item<select id="olHoldFood"></select></label><label>Reason<input id="olHoldReason" maxlength="200" placeholder="Pending medical / galley check" required=""/></label><button class="button secondary" type="submit">Hold from new menus</button></form></div>
+<div class="two-col form-layout"><div class="panel"><h3>Add a food log</h3><form class="fields single" id="dietForm"><label>Date<input id="dietDate" name="date" required="" type="date"/></label><div class="food-picker">
+<div class="food-picker-title"><span class="eyebrow">ISS FOOD LIBRARY</span><span>Documented menu examples</span></div>
+<label>Food category<select id="foodCategory"><option value="all">All categories</option></select></label>
+<label>Food item<select id="foodItem"><option value="">Choose a food</option></select></label>
+<div class="food-picker-row"><label>Meal<select id="mealType"><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Snack</option></select></label><label>Servings<input id="foodServings" max="10" min="1" step="1" type="number" value="1"/></label></div>
+<div class="food-detail" id="foodDescription">Choose a food to see how it is typically prepared or served in space.</div>
+<button class="button secondary food-add" id="addSelectedFood" type="button">+ Add selected food</button>
+<div class="food-selected" id="selectedFoods"></div>
+<p class="food-footnote">Menu examples are based on NASA, CSA and JAXA records. Actual ISS stock and servings vary by mission; nutrition numbers are not estimated automatically.</p>
+</div><label>Meal record<textarea id="dietMeals" name="meals" placeholder="Choose foods above or type a meal you had..." required="" rows="5"></textarea></label><label>Calories (optional)<input max="15000" min="0" name="calories" placeholder="Only if recorded" type="number"/></label><label>Notes<textarea name="notes" placeholder="Appetite, digestion, meal timing..." rows="2"></textarea></label><button class="button primary" type="submit">Save food log</button></form></div><div class="panel"><div class="panel-heading"><h3>Diet records</h3><span>Recent entries</span></div><div id="dietList"></div><div class="result" id="restrictionInfo"></div></div></div>
+</section>
+<section class="view" id="view-emergency"><div class="page-head"><div><div class="eyebrow danger-text">HIGH PRIORITY INFORMATION</div><h1>Emergency information</h1><p>Quick access to important medical details for an astronaut and their authorized mission medical team.</p></div></div>
+<div class="emergency-banner"><b>Possible emergency?</b><p>For serious symptoms, follow mission emergency procedures and contact the flight medical team. This screen does not send alerts automatically.</p></div>
+<div class="two-col form-layout"><div class="panel"><h3>Emergency medical profile</h3><form class="fields single" id="emergencyForm"><label>Emergency / mission medical contact<input name="emergency_contact" placeholder="Name or mission medical contact"/></label><label>Blood type<select name="blood_type"><option value="">Not entered</option><option>Unknown</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></label><label>Known allergies<textarea name="allergies" placeholder="Or write none known" rows="2"></textarea></label><label>Relevant health conditions<textarea name="conditions" placeholder="For authorized medical staff" rows="2"></textarea></label><label>Dietary restrictions<textarea name="dietary_restrictions" placeholder="Food allergies, restrictions, preferences" rows="2"></textarea></label><label>Emergency notes<textarea name="emergency_notes" placeholder="Important information for flight medical staff" rows="3"></textarea></label><button class="button primary" type="submit">Save emergency profile</button></form></div><div class="panel"><div class="panel-heading"><h3>Emergency quick reference</h3><span>Personal / restricted</span></div><div id="emergencyCard"></div><div class="disclaimer">This record is an aid for authorized staff. Check medication lists, allergies and conditions against official medical records before any clinical decision.</div></div></div>
+<div class="panel ol-verify hidden" id="olVerifyPanel">
+<div class="panel-heading"><h3 data-i18n="Verify emergency essentials">Verify emergency essentials</h3><span data-i18n="Medical staff only">Medical staff only</span></div>
+<form class="fields" id="olVerifyForm">
+<label data-i18n="Astronaut">Astronaut<select id="olVerifyAstronaut" name="astronaut_id"></select></label>
+<label data-i18n="Crew medical contact">Crew medical contact<input maxlength="600" name="crew_medical_contact" placeholder="Name, channel or call sign"/></label>
+<label data-i18n="Verified allergies">Verified allergies<textarea name="verified_allergies" placeholder="Unknown or None known, when verified" rows="2"></textarea></label>
+<label data-i18n="Verified conditions">Verified conditions<textarea name="verified_conditions" placeholder="Unknown or None known, when verified" rows="2"></textarea></label>
+<label data-i18n="Relevant verified medications">Relevant verified medications<textarea name="verified_medications" placeholder="Verified current medications or None known" rows="2"></textarea></label>
+<label data-i18n="Approved emergency instructions">Approved emergency instructions<textarea name="approved_emergency_instructions" placeholder="Only instructions approved by mission medical staff" rows="3"></textarea></label>
+<div class="wide"><button class="button primary" data-i18n="Save verification" type="submit">Save verification</button></div>
+</form><p class="fine" data-i18n="Blank fields remain Unknown. None known is an explicit verified finding.">Blank fields remain Unknown. None known is an explicit verified finding.</p></div></section>
+<section class="view" id="view-assistant"><div class="page-head"><div><div class="eyebrow">DATA-AWARE MISSION SUPPORT</div><h1>AI health assistant</h1><p>Ask about daily check-ins, simulated wearable data, symptoms, radiation, nutrition and bone-health reference.</p></div></div>
+<div class="assistant-layout"><div class="panel"><div class="panel-heading"><h3>OrbitLife Copilot</h3><span class="mode-pill" id="aiModeTag">OFFLINE MODE</span></div><div class="mode-pick"><label><input checked="" name="aiMode" type="radio" value="offline"> Offline assistant</input></label><label><input name="aiMode" type="radio" value="connected"/> Connected AI (requires credits)</label></div><div aria-live="polite" class="chat" id="chatMessages"><div class="bubble assistant-bubble">Ask about your health readings, reported symptoms, nutrition or radiation history. I can summarize changes and suggest what to review next.</div></div><form class="chat-form" id="chatForm"><textarea id="chatQuestion" name="question" placeholder="Ask anything about your mission health…" required="" rows="3"></textarea><button class="button primary" type="submit">Ask OrbitLife</button></form><p class="fine">Connected mode uses your selected astronaut records when you ask a question.</p></div><div class="panel assistant-context-panel"><div class="panel-heading"><h3>Information available to OrbitLife</h3><span>Current selected astronaut</span></div><div class="assistant-context" id="assistantContext"></div><button class="button secondary" data-goto="wearables">Review wearable feed</button><button class="button secondary" data-goto="daily">Update daily readings</button><details class="info-disclosure compact"><summary>How assistant recommendations work</summary><p>The offline assistant uses defined rules. Connected mode sends the selected astronaut's saved records to a language model. Suggestions are for reviewing health and should not replace the mission medical team.</p></details></div></div>
+</section>
+<section class="view" id="view-cortisol">
+<div class="page-head"><div><div class="eyebrow" data-i18n="HORMONE HEALTH">HORMONE HEALTH</div><h1 data-i18n="Cortisol tracking">Cortisol tracking</h1><p data-i18n="Review saliva results against the lab's own range and comparable collection times.">Review saliva results against the lab's own range and comparable collection times.</p></div><span class="id-pill" id="olCortisolAstro">AST-001</span></div>
+<div class="two-col"><div class="panel"><div class="panel-heading"><h3 data-i18n="Cortisol trend">Cortisol trend</h3><span data-i18n="Similar time since waking">Similar time since waking</span></div>
+<div class="fields"><label data-i18n="Compare sample timing">Compare sample timing<select id="olCortisolWindow"><option value="all">All times (not directly comparable)</option><option value="0-60">0–60 min after waking</option><option value="61-120">61–120 min after waking</option><option value="121-240">121–240 min after waking</option><option value="241-480">241–480 min after waking</option><option value="481-1440">Over 480 min after waking</option><option value="unknown">Time since waking unknown</option></select></label><label data-i18n="Units">Units<select id="olCortisolUnits"><option value="nmol/L">nmol/L</option><option value="µg/dL">µg/dL</option></select></label></div>
+<div class="ol-hormone-chart" id="olCortisolChart"></div><p class="fine" data-i18n="Results are not compared across different units or unrelated collection times.">Results are not compared across different units or unrelated collection times.</p>
+</div><div class="panel"><h3 data-i18n="Saliva test history">Saliva test history</h3><div class="ol-cortisol-records" id="olCortisolRecords"></div></div></div>
+<div class="panel hidden" id="olCortisolEditor"><div class="panel-heading"><h3 data-i18n="Enter lab result">Enter lab result</h3><span data-i18n="Authorized medical crew">Authorized medical crew</span></div>
+<form class="fields" id="olCortisolForm">
+<label data-i18n="Astronaut">Astronaut<select id="olCortisolTarget" name="astronaut_id"></select></label>
+<label data-i18n="Collection date and time">Collection date and time<input id="olCortisolDate" name="local_timestamp" required="" type="datetime-local"/></label>
+<label data-i18n="Minutes since waking">Minutes since waking<input max="1440" min="0" name="since_waking_min" placeholder="If known" step="1" type="number"/></label>
+<label data-i18n="Result">Result<input max="99999" min="0.0001" name="result" required="" step="any" type="number"/></label>
+<label data-i18n="Units">Units<select name="units"><option value="nmol/L">nmol/L</option><option value="µg/dL">µg/dL</option></select></label>
+<label data-i18n="Source">Source<select name="source"><option value="lab">Saliva lab report</option><option value="simulation">Simulation (clearly labeled)</option></select></label>
+<label data-i18n="Lab reference minimum">Lab reference minimum<input min="0" name="reference_low" placeholder="Optional" step="any" type="number"/></label>
+<label data-i18n="Lab reference maximum">Lab reference maximum<input min="0" name="reference_high" placeholder="Optional" step="any" type="number"/></label>
+<label class="wide" data-i18n="Lab / report reference">Lab / report reference<input maxlength="300" name="source_detail" placeholder="Required for measured lab results"/></label>
+<div class="wide ol-buttons"><button class="button primary" data-i18n="Save cortisol result" type="submit">Save cortisol result</button></div></form>
+<p class="fine" data-i18n="Device imports require a separately configured validated device connection.">Device imports require a separately configured validated device connection.</p></div></section>
+<section class="view" id="view-developer" aria-label="Developer Tools">
+  <div class="page-head ol-dev-head"><div><div class="eyebrow">SYSTEM CONFIGURATION / COMMANDER ONLY</div><h1>Developer Tools</h1><p>USB terminal, interface customization and controlled record management.</p></div><span class="id-pill">LOCAL ADMIN</span></div>
+  <div class="ol-dev-grid">
+    <section class="panel ol-dev-card" aria-labelledby="devUsbHeading">
+      <div class="ol-dev-card-title"><span class="ol-dev-icon">⌁</span><div><h2 id="devUsbHeading">USB Serial Terminal</h2><p>ESP32, RC522, OLED and rotary encoder over USB. Touchscreen remains fully usable.</p></div></div>
+      <div class="ol-device-status" id="devStatus" role="status">Checking USB device…</div>
+      <form id="devSerialForm" class="ol-dev-fields">
+        <label>COM port <select id="devPort" name="serial_port"><option value="">Select USB port…</option></select></label>
+        <div class="ol-dev-inline"><label class="ol-check"><input id="devSerialEnabled" type="checkbox"/> Connect to ESP32</label><button type="button" class="button secondary" id="devRefreshPorts">Refresh ports</button></div>
+        <button type="submit" class="button primary">Save &amp; reconnect</button>
+      </form>
+      <label class="ol-dev-demo-label"><input id="devDemoRfidElias" type="checkbox" checked/> <span><strong>RFID demo mode: select Bodan</strong><small>Any scanned card selects AST-001 for the login screen. It never signs in without a password. Turn off after you pair real cards.</small></span></label><div class="ol-dev-readout" id="devLastEvent">Waiting for USB events.</div><div class="ol-dev-inline ol-dev-test-controls"><button type="button" class="button secondary" data-dev-test="left">← Test left</button><button type="button" class="button secondary" data-dev-test="press">Test click</button><button type="button" class="button secondary" data-dev-test="right">Test right →</button></div>
+      <p class="fine">Close Arduino Serial Monitor before connecting. Firmware must send one JSON event per line at 115200 baud. Card scans only select an account; password login is still required.</p>
+      <button type="button" class="button secondary" id="devOpenPair">Pair RFID cards on Crew Overview</button>
+    </section>
+    <section class="panel ol-dev-card" aria-labelledby="devLookHeading">
+      <div class="ol-dev-card-title"><span class="ol-dev-icon">◈</span><div><h2 id="devLookHeading">Appearance</h2><p>Change the accent color, corner shape and spacing.</p></div></div>
+      <form id="devStyleForm" class="ol-dev-fields">
+        <label>Primary accent <input type="color" id="devAccent" name="accent" value="#20c6d8"/></label>
+        <div class="ol-swatches" aria-label="Suggested colors"><button type="button" data-dev-swatch="#20c6d8" style="--swatch:#20c6d8" aria-label="Cyan" title="Cyan"></button><button type="button" data-dev-swatch="#448af3" style="--swatch:#448af3" aria-label="Blue" title="Blue"></button><button type="button" data-dev-swatch="#14b8a6" style="--swatch:#14b8a6" aria-label="Teal" title="Teal"></button><button type="button" data-dev-swatch="#a78bfa" style="--swatch:#a78bfa" aria-label="Violet" title="Violet"></button><button type="button" data-dev-swatch="#f0b75a" style="--swatch:#f0b75a" aria-label="Gold" title="Gold"></button></div>
+        <label>Corner radius <input type="range" id="devRadius" min="6" max="26" step="1" value="14"/> <output id="devRadiusValue">14 px</output></label>
+        <label>Spacing <select id="devDensity"><option value="comfortable">Comfortable</option><option value="compact">Compact</option></select></label>
+        <div class="ol-dev-inline"><button type="submit" class="button primary">Save appearance</button><button type="button" class="button secondary" id="devResetStyle">Default style</button></div>
+      </form>
+      <p class="fine">Saved for this local OrbitLife installation. Each astronaut's Light/Dark preference remains separate.</p>
+    </section>
+    <section class="panel ol-dev-card ol-dev-wide" aria-labelledby="devRecordsHeading">
+      <div class="ol-dev-card-title"><span class="ol-dev-icon">▤</span><div><h2 id="devRecordsHeading">Manage records</h2><p>Find and delete one selected record. A backup is created first.</p></div></div>
+      <div class="ol-dev-record-grid">
+        <label>Astronaut <select id="devAstronaut"></select></label>
+        <label>Record type <select id="devCategory"><option value="daily">Daily check-ins</option><option value="wearable">Wearable history</option><option value="radiation">Radiation</option><option value="symptoms">Symptom reports</option><option value="nutrition">Food records</option><option value="medications">Medication log</option><option value="cortisol">Cortisol</option><option value="incidents">Emergency incidents</option><option value="food_illness">Food incident reports</option></select></label>
+        <label>Date (optional) <input id="devDate" type="date"/></label>
+        <button type="button" id="devFindRecords" class="button secondary">Find records</button>
+      </div>
+      <div class="ol-dev-records" id="devRecords" aria-live="polite">Choose a member and type, then click Find records.</div>
+      <p class="fine">Demo administrator only. This deletes individual database entries, not crew logins. Backups are stored under <code>developer_backups/</code>. Existing medical records should not be deleted in real deployments.</p>
+    </section>
+  </div>
+  <div class="notice hidden" id="devFeedback" role="status"></div>
+</section>
+<section class="view" id="view-settings"><div class="page-head"><div><div class="eyebrow">ACCOUNT SECURITY</div><h1>Personal account</h1><p>Your astronaut digital identity and password.</p></div></div><div class="two-col form-layout"><div class="panel"><h3>Identity card</h3><div id="accountCard"></div></div><div class="panel"><h3>Change password</h3><form class="fields single" id="passwordForm"><label>Current password<input autocomplete="current-password" name="old" required="" type="password"/></label><label>New password (at least 12 characters)<input autocomplete="new-password" minlength="12" name="new" required="" type="password"/></label><button class="button primary" type="submit">Change password</button></form><p class="fine">Changing the password signs out this account.</p></div></div>
+<div class="panel ol-preferences" id="olPreferencesPanel">
+<div class="panel-heading"><h3 data-i18n="Appearance and profile">Appearance and profile</h3><span data-i18n="Saved to your crew account">Saved to your crew account</span></div>
+<form class="fields" id="olPreferencesForm">
+<label data-i18n="Language">Language<select id="olLanguage" name="language"><option value="en">English</option><option value="mk">Македонски</option><option value="fr">Français</option><option value="ru">Русский</option></select></label>
+<label data-i18n="Theme">Theme<select id="olTheme" name="theme"><option value="system">System</option><option value="dark">Dark</option><option value="light">Light</option></select></label>
+<label data-i18n="Accent color">Accent color<select id="olAccent" name="accent"><option value="#13C8E7">Cyan</option><option value="#31C48D">Green</option><option value="#A78BFA">Violet</option><option value="#F59E0B">Amber</option><option value="#F87171">Coral</option><option value="#60A5FA">Blue</option><option value="#E879F9">Pink</option><option value="#14B8A6">Teal</option></select></label>
+<label data-i18n="Profile photo">Profile photo<input accept="image/jpeg,image/png,image/webp" id="olAvatarFile" type="file"/></label>
+<label class="wide" data-i18n="Dashboard status">Dashboard status<input id="olStatusText" maxlength="140" name="status_text" placeholder="Earth looks incredible today." type="text"/></label>
+<label class="wide ol-checkbox"><input checked="" id="olShowStatus" type="checkbox"/> <span data-i18n="Show my status on the crew dashboard">Show my status on the crew dashboard</span></label>
+<div class="wide ol-buttons"><button class="button primary" data-i18n="Save preferences" type="submit">Save preferences</button><button class="button secondary" data-i18n="Upload profile photo" id="olUploadAvatar" type="button">Upload profile photo</button></div>
+</form><p class="fine" data-i18n="Settings follow your account on shared devices.">Settings follow your account on shared devices.</p>
+</div></section>
+<footer class="portal-footer"><span>ORBITLIFE · MISSION HEALTH PORTAL</span><button id="openResearch" type="button">Data sources &amp; system notes</button><span>EXPEDITION 01</span></footer>
+</main>
+</div>
+<div aria-label="Crew member medical overview" aria-modal="true" class="modal hidden" id="crewInspectModal" role="dialog">
+<div class="modal-content inspect-dialog">
+<button aria-label="Close crew details" class="close" id="closeCrewInspect">×</button>
+<div class="inspect-heading"><img alt="Fictional astronaut helmet" id="inspectPhoto" src="portraits/AST-001.webp"/><div><div class="eyebrow">ASTRONAUT CREW STATUS</div><h2 id="inspectName">Astronaut</h2><p id="inspectRole">Mission crew</p></div></div>
+<div class="inspect-summary"><span class="flag" id="inspectStatus">ON TRACK</span><span class="critical-banner hidden" id="inspectCriticalTag">CRITICAL CONDITION · RESPOND NOW</span><p id="inspectMetrics"></p><div class="result" id="inspectAction"></div></div>
+<div class="disclaimer" id="inspectLocked">Sign in to see emergency medical details.</div>
+<button class="button primary" id="inspectLogin" type="button">Sign in to this crew profile</button>
+<div class="hidden" id="inspectPrivate"><h3>Emergency health information</h3><div class="emergency-banner"><b>For urgent symptoms, follow mission protocol</b><p>Follow mission procedures and contact flight medical. This panel does not send alerts automatically.</p></div><div class="inspect-emergency-fields" id="inspectEmergencyFields"></div></div>
+<div class="hidden" id="inspectManage"><form class="inspect-critical-form" id="inspectCriticalForm"><label class="checkline"><input id="criticalToggle" type="checkbox"/><b>Mark this astronaut as in critical condition</b></label><label for="criticalReason">Reason / mission note<textarea id="criticalReason" maxlength="320" placeholder="Short reason for the flag" rows="2"></textarea></label><small id="criticalUpdate"></small><button class="button warning" type="submit">Save critical condition status</button></form><div class="inspect-buttons"><button class="button secondary" id="inspectOpenEmergency">Open full emergency record</button><button class="button secondary" id="inspectOpenProfile">Open health dashboard</button></div></div>
+</div>
+</div>
+<div aria-label="Astronaut login" aria-modal="true" class="modal hidden" id="loginModal" role="dialog"><div class="modal-content login-dialog"><button aria-label="Close" class="close" id="closeLogin">×</button><div class="login-dialog-top"><div class="eyebrow">ORBITLIFE / EXPEDITION 01</div><h2>Welcome back, astronaut.</h2><p>Choose your profile, then enter your personal password to continue.</p></div><div aria-label="Select crew member" class="login-crew-grid" id="loginCrewGrid" role="group"></div><form class="fields single" id="loginForm"><div class="login-current"><img alt="Selected astronaut" id="loginSelectedPhoto" src="portraits/AST-001.webp"/><div><b id="loginSelectedName">Bodan</b><small id="loginSelectedRole">Commander · AST-001</small></div></div><label>Username<input autocomplete="username" id="loginUsername" name="username" placeholder="astro01" required="" value="astro01"/></label><label>Password<input autocomplete="current-password" id="loginPassword" name="password" placeholder="Your private password" required="" type="password"/></label><button class="button primary login-submit" type="submit">Access my health dashboard →</button></form><p class="fine login-hint">Scan your paired RFID card to sign in automatically, or use your password.</p><p class="fine ol-login-rfid-status" id="olLoginRFIDStatus" aria-live="polite">Waiting for a paired RFID card (ESP32 must be connected).</p></div></div>
+<div aria-label="Data sources and interpretation" aria-modal="true" class="modal hidden" id="researchModal" role="dialog"><div class="modal-content research-dialog"><button aria-label="Close details" class="close" id="closeResearch">×</button><div class="eyebrow">DATA SOURCES</div><h2>Measurements, estimates &amp; research</h2><p>OrbitLife organizes crew-entered readings and mission logs. It is a NASA Space Apps project and is not a certified medical device. The included astronaut accounts and starting records are fictional.</p><div class="research-list"><div><b>Wearable health</b><p>The wearable section contains synthetic Garmin-style records, and optionally imported local JSON records. No Garmin watch, account or live Garmin API is connected. Garmin integration requires official developer access and account consent.</p></div><div><b>Measured vs estimated</b><p>Daily vitals, glucose, temperature, body mass and dosimeter values are entered or imported. Bone trend and what-if comparisons are reference models, not physical measurements.</p></div><div><b>Health guidance</b><p>Offline responses use rules, while connected AI can discuss records. Neither mode diagnoses disease, approves medication or sends emergency alerts. Follow mission medical procedures for urgent conditions.</p></div><div><b>ISS food catalog</b><p>Foods are documented by space agencies, not a live stock list. Log actual servings. OrbitLife doesn't guess calories or nutrients.</p></div></div><div class="research-links"><a href="https://developer.garmin.com/gc-developer-program/overview/" rel="noopener noreferrer" target="_blank">Garmin developer program ↗</a><a href="https://www.nasa.gov/directorates/esdmd/hhp/space-food-systems/" rel="noopener noreferrer" target="_blank">NASA Space Food Systems ↗</a><a href="https://www.asc-csa.gc.ca/eng/multimedia/search/image/15774" rel="noopener noreferrer" target="_blank">CSA space food menu ↗</a><a href="https://humans-in-space.jaxa.jp/en/life/food-in-space/" rel="noopener noreferrer" target="_blank">JAXA food in space ↗</a><a href="https://www.nasa.gov/missions/station/iss-research/crew-8-concludes-space-station-scientific-mission/" rel="noopener noreferrer" target="_blank">NASA mass measurement ↗</a><a href="https://www.nasa.gov/reference/risk-of-spaceflight-induced-bone-changes/" rel="noopener noreferrer" target="_blank">NASA bone density research ↗</a></div></div></div>
+<button aria-label="Open Quick AI" class="ol-quickai-fab hidden" id="olQuickAiFab" type="button">✦ <span>Ask me something</span></button>
+<div aria-label="OrbitLife Quick AI" aria-modal="true" class="ol-quickai-overlay hidden" id="olQuickAiOverlay" role="dialog">
+<div class="ol-quickai-dialog"><header><div><small>ORBITLIFE / SHARED ASSISTANT</small><h2>Quick AI</h2><p>General questions. No private health data is shared.</p></div><button aria-label="Close Quick AI" id="olQuickAiClose" type="button">×</button></header>
+<div aria-live="polite" class="ol-quickai-thread" id="olQuickAiThread" role="log"><div class="ol-quickai-response">Ask about OrbitLife, the ISS, radiation, food or daily routines.</div></div>
+<form class="ol-quickai-form" id="olQuickAiForm"><label>Mode<select id="olQuickAiMode"><option value="offline">Offline answers</option><option value="connected">Connected AI (requires API credits)</option></select></label><label class="ol-quickai-question">Your question<textarea id="olQuickAiQuestion" maxlength="1500" placeholder="How do I record radiation exposure?" required="" rows="2"></textarea></label><button class="button primary" id="olQuickAiSubmit" type="submit">Ask Quick AI</button></form>
+</div></div>
+<button aria-label="Emergency" class="ol-emergency-fab" data-i18n="Emergency" id="olEmergencyFab" type="button">✚ <span>Emergency</span></button>
+<div aria-label="Emergency information" aria-modal="true" class="ol-emergency-overlay hidden" id="olEmergencyOverlay" role="dialog">
+<div class="ol-emergency-panel">
+<header class="ol-emergency-header"><div><small>ORBITLIFE / MEDICAL RESPONSE</small><h2 data-i18n="Emergency access" id="olEmergencyHeading">Emergency access</h2></div><button aria-label="Close" class="ol-close" id="olEmergencyClose" type="button">×</button></header>
+<div class="ol-emergency-quickchoices" id="olEmergencyChoices"><button aria-label="View astronaut emergency information" class="ol-emergency-choice" id="olEmergencyViewChoice" type="button"><span class="ol-choice-icon">▣</span><span><b>View emergency card</b><small>Verified details for any astronaut</small></span></button><button aria-label="Report an emergency" class="ol-emergency-choice danger" id="olEmergencyReportChoice" type="button"><span class="ol-choice-icon">!</span><span><b>Report an emergency</b><small>Notify the crew and medical team dashboard</small></span></button></div>
+<div class="ol-emergency-body" id="olEmergencyPicker"><p data-i18n="Choose an astronaut">Choose an astronaut</p><div class="ol-emergency-crew" id="olEmergencyCrew"></div></div>
+<div class="ol-emergency-body hidden" id="olEmergencyCard"></div>
+<div class="ol-emergency-body hidden" id="olIncidentPane">
+<h3 data-i18n="Report an emergency">Report an emergency</h3>
+<form class="fields single" id="olIncidentForm">
+<label data-i18n="Astronaut">Astronaut<select id="olIncidentAstronaut" name="astronaut_id" required=""></select></label>
+<label data-i18n="Location">Location<input maxlength="130" name="location" placeholder="Module, airlock or other location" required=""/></label>
+<label data-i18n="Short description">Short description<textarea maxlength="1200" name="description" placeholder="What happened? What help is needed?" required="" rows="3"></textarea></label>
+<label data-i18n="Urgency">Urgency<select name="urgency" required=""><option value="moderate">Moderate</option><option value="high">High</option><option value="critical">Critical</option><option value="low">Low</option></select></label>
+<label data-i18n="Photo (optional)">Photo (optional)<input accept="image/*" capture="environment" id="olIncidentPhoto" type="file"/></label>
+<button class="button warning" data-i18n="Save emergency report" id="olSubmitIncident" type="submit">Save emergency report</button>
+</form><div aria-live="polite" id="olIncidentResult"></div></div>
+<footer class="ol-emergency-actions"><button class="button secondary" data-i18n="Switch astronaut" id="olSwitchAstronaut" type="button">Switch astronaut</button><button class="button warning" data-i18n="Report an emergency" id="olOpenIncident" type="button">Report an emergency</button><button class="button secondary hidden" data-i18n="Back to card" id="olBackToEmergency" type="button">Back to card</button></footer>
+</div>
+</div></body></html>
