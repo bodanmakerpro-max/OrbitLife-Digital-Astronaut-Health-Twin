@@ -50,3 +50,8 @@ The physical ESP32/RC522, clinical validity, medical devices and full visual beh
 - Pundyavana et al. (2023), [Cognition Test Battery Survey: Development of a Single Alertness and Mood Score](https://doi.org/10.3390/app13042364)
 - User-supplied *Space Health App.pdf*, pages 1–3 (lunar South Pole scenario and risk-topic outline).
 - See [`DIGITAL_TWIN_RESEARCH_NOTES.md`](DIGITAL_TWIN_RESEARCH_NOTES.md) for exact limitations.
+
+## Space Apps 2026 presentation
+
+The seven-slide team presentation is available as a PDF:
+[OrbitLife NASA Space Apps 2026 - 7 slides](presentations/OrbitLife_Space_Apps_2026_7_Slides.pdf).
