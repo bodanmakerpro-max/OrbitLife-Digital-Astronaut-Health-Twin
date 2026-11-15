@@ -1,4 +1,4 @@
-/* OrbitLife 19 - ESP32 Smart Mission Terminal (USB, OLED, RFID, encoder)
+/* OrbitLife 20.1 - ESP32 Smart Mission Terminal (USB, OLED, RFID, encoder)
    Board: classic ESP32 DevKit / WROOM-32.
    OLED 0.96 SSD1306 I2C: SDA=16 SCL=17 VCC=3.3V GND=GND
    RC522 SPI: SS=21 SCK=18 MISO=19 MOSI=23 RST=22 3V3 and GND
@@ -21,10 +21,31 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C display(U8G2_R0,U8X8_PIN_NONE,SCL_PIN,SDA_PI
 const char* homeActions[]={"dashboard","food","login"};
 const char* cardActions[]={"emergency","food","daily","radiation","body","medications","records","assistant","dashboard","login"};
 constexpr int homeCount=3,cardCount=10;
-const int8_t quad[16]={0,-1,1,0,1,0,0,-1,-1,0,0,1,0,1,-1,0};
+// KY-040: one CLK falling edge per tactile detent, regardless of its other
+// quadrature transitions. Set to -1 only if clockwise moves the menu up.
+constexpr int8_t ENC_DIRECTION=1;
+constexpr uint32_t ENC_DEBOUNCE_US=5000; // reject contact bounce within 5 ms
+constexpr uint8_t ENC_QUEUE_CAPACITY=32; // power of two; preserves rapid reversals
+portMUX_TYPE encoderMux=portMUX_INITIALIZER_UNLOCKED;
+volatile int8_t encoderQueue[ENC_QUEUE_CAPACITY];
+volatile uint8_t encoderWrite=0,encoderRead=0;
+volatile uint32_t lastEncoderEdgeUs=0;
+
+// Interrupts keep encoder clicks even while OLED I2C or RFID takes time.
+void IRAM_ATTR onEncoderClock() {
+  uint32_t now=micros();
+  if((uint32_t)(now-lastEncoderEdgeUs)<ENC_DEBOUNCE_US)return;
+  lastEncoderEdgeUs=now;
+  int8_t delta=(digitalRead(ENC_DT)==HIGH?1:-1)*ENC_DIRECTION;
+  portENTER_CRITICAL_ISR(&encoderMux);
+  uint8_t next=(encoderWrite+1)&(ENC_QUEUE_CAPACITY-1);
+  if(next!=encoderRead){encoderQueue[encoderWrite]=delta;encoderWrite=next;}
+  portEXIT_CRITICAL_ISR(&encoderMux);
+}
+
 enum View{HOME,CARD,BROWSE};
 View screen=HOME;
-int selected=0;int8_t encoderAccum=0;uint8_t previousAB=0;
+int selected=0;
 bool prevRaw=HIGH,stableButton=HIGH,longHandled=false,rfidReady=false;
 unsigned long changedAt=0,pressedAt=0,lastScan=0,lastDraw=0,lastCheck=0;
 String timeText="--:--", language="mk",serialLine="",lastCard="",scannedName="Astronaut";
@@ -148,15 +169,17 @@ void readHost(){
   }
 }
 void readEncoder(){
-  uint8_t ab=(digitalRead(ENC_CLK)<<1)|digitalRead(ENC_DT);
-  if(ab==previousAB)return;
-  encoderAccum+=quad[(previousAB<<2)|ab];previousAB=ab;
-  int delta=0;
-  if(encoderAccum>=4){encoderAccum=0;delta=1;}
-  else if(encoderAccum<=-4){encoderAccum=0;delta=-1;}
-  if(!delta)return;
-  if(screen!=BROWSE){selected=(selected+delta+optionCount())%optionCount();}
-  emitRotate(delta);
+  // Consume exactly one queued event per CLK detent. No quadrature
+  // accumulation, so a single encoder click always moves one menu item.
+  while(true){
+    portENTER_CRITICAL(&encoderMux);
+    if(encoderRead==encoderWrite){portEXIT_CRITICAL(&encoderMux);break;}
+    int8_t delta=encoderQueue[encoderRead];
+    encoderRead=(encoderRead+1)&(ENC_QUEUE_CAPACITY-1);
+    portEXIT_CRITICAL(&encoderMux);
+    if(screen!=BROWSE)selected=(selected+delta+optionCount())%optionCount();
+    emitRotate(delta);
+  }
 }
 void shortPress(){
   if(screen==BROWSE){event("press");return;}
@@ -202,7 +225,8 @@ void setup(){
   display.setI2CAddress(0x3C*2);
   display.begin();
   pinMode(ENC_CLK,INPUT_PULLUP);pinMode(ENC_DT,INPUT_PULLUP);pinMode(ENC_SW,INPUT_PULLUP);
-  previousAB=(digitalRead(ENC_CLK)<<1)|digitalRead(ENC_DT);
+  // Falling CLK edge occurs once per notch on the KY-040.
+  attachInterrupt(digitalPinToInterrupt(ENC_CLK),onEncoderClock,FALLING);
   SPI.begin(18,19,23,RFID_SS);checkCard();
   event("hello");
   draw();
