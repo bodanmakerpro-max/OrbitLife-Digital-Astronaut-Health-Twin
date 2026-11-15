@@ -9,6 +9,7 @@
 <script defer src="developer-ui.js"></script><script defer src="welcome-esp.js"></script><link href="launch-ui.css" rel="stylesheet"/><script defer src="launch-ui.js"></script>
 <link href="alerts-ui.css" rel="stylesheet"/><link href="localization.css" rel="stylesheet"/>
 <script defer src="alerts-ui.js"></script><script defer src="localization.js"></script>
+<link href="digital-twin.css" rel="stylesheet"/><script defer src="digital-twin.js"></script>
 </head>
 <body class="logged-out ol-launch-active">
 <div id="olLaunchScreen" class="ol-launch-screen" role="region" aria-label="OrbitLife Smart Mission Monitor start screen">
@@ -69,6 +70,7 @@
    <summary>All OrbitLife mission tools <span>Explore the complete software</span></summary>
    <div class="ol-launch-tools-grid" aria-label="All mission tools">
     <button type="button" data-launch-action="personal">My astronaut dashboard</button>
+    <button type="button" data-launch-action="twin">Personal Digital Twin + Mood</button>
     <button type="button" data-launch-action="daily">Daily health check-in</button>
     <button type="button" data-launch-action="wearables">Wearable health data</button>
     <button type="button" data-launch-action="radiation">Radiation tracking</button>
@@ -109,6 +111,7 @@
 <button class="navitem active" data-view="crew"><b>⌂</b> <span>Home &amp; crew</span></button><button class="navitem" data-view="menu"><b>◈</b> Today’s food</button>
 <button class="navitem private" data-view="personal"><b>◉</b> My dashboard</button>
 <button class="navitem private" data-view="daily"><b>▤</b> Daily check-in</button>
+<button class="navitem private" data-view="twin"><b>◈</b> Digital Twin <span class="twin-nav-new">NEW</span></button>
 <button class="navitem private" data-view="wearables"><b>⌚</b> Wearable health</button><button class="navitem private" data-view="records"><b>▤</b> Records search</button>
 <details class="nav-group" open=""><summary><span>Health tracking</span><span class="nav-count">4 tools</span></summary>
 <button class="navitem private" data-view="radiation"><b>☢</b> Radiation exposure</button>
@@ -149,6 +152,7 @@
  <summary>Explore all mission tools <span>AI, health, safety, records and more</span></summary>
  <div class="ol-home-tools-grid">
   <button data-ol-open="personal" type="button">My dashboard</button>
+  <button data-ol-open="twin" type="button">Digital Twin + Mood</button>
   <button data-ol-open="wearables" type="button">Wearables</button>
   <button data-ol-open="radiation" type="button">Radiation</button>
   <button data-ol-open="cortisol" type="button">Cortisol</button>
@@ -196,6 +200,29 @@
 <div class="panel"><div class="panel-heading"><h3>Bone health reference</h3><span>Population model · not a scan</span></div><div class="bone-row"><div class="bone-ring" id="boneRing"><div><strong id="boneValue">--</strong><small>BASELINE %</small></div></div><div><b id="boneRange">Bone trend reference</b><p id="boneText">Reference model based on published spaceflight research.</p></div></div></div></div>
 <div class="two-col"><div class="panel"><div class="panel-heading"><h3>Simulation lab</h3><span>Change daily habits</span></div><p class="fine">Compare proposed sleep and activity targets with current readings.</p><label>Sleep target <strong id="simSleepLabel">8 h</strong></label><input id="simSleep" max="10" min="4" step="0.5" type="range" value="8"/><label>Exercise target <strong id="simExerciseLabel">45 min</strong></label><input id="simExercise" max="120" min="0" step="5" type="range" value="45"/><div class="result" id="simResult"></div></div>
 <div class="panel"><div class="panel-heading"><h3>Current follow-up actions</h3><span>From latest records</span></div><div id="personalActions"></div><button class="button primary" data-goto="daily">Enter today's readings</button></div></div>
+</section>
+<section class="view twin-view" id="view-twin" aria-label="Personal Digital Twin">
+ <div class="twin-hero"><div class="twin-hero-copy">
+ <div class="twin-eyebrow">ORBITLIFE / PERSONAL DIGITAL TWIN <span class="twin-dot"></span> LOCAL DEMONSTRATION</div>
+ <h1>A living picture of <em>your health.</em></h1>
+ <p>Bring daily records, wearable readings, nutrition, radiation and mood together in one personal timeline. Compare yourself with your own past, not a generic astronaut.</p>
+ <div class="twin-hero-actions"><button class="button primary" id="twinJumpMood" type="button">+ New mood & alertness check-in</button><button class="button secondary" id="twinRefresh" type="button">Refresh twin ↻</button></div>
+ </div><div class="twin-orbit-art" aria-hidden="true"><div class="twin-orbit-outer"></div><div class="twin-orbit-mid"></div><div class="twin-orbit-inner"></div><div class="twin-orbit-core">◉</div><span class="twin-orbit-label twin-orbit-label-1">HEALTH</span><span class="twin-orbit-label twin-orbit-label-2">CONTEXT</span><span class="twin-orbit-label twin-orbit-label-3">HISTORY</span></div></div>
+ <div class="twin-context"><div><span>CREW MEMBER</span><strong id="twinName">Select an astronaut</strong></div><div><span>MISSION SCENARIO</span><strong>Artemis-style / Lunar South Pole / 30 days</strong></div><div><span>DATA MODE</span><strong>Live local records + labelled demo data</strong></div></div>
+ <div id="twinMessage" class="twin-message" role="status" aria-live="polite">Sign in to load your personal twin.</div>
+ <section class="twin-section" aria-label="Your health measurements"><div class="twin-section-head"><div><div class="twin-kicker">01 · CURRENT PICTURE</div><h2>Health signals at a glance</h2><p>Each signal keeps its original source. Baseline is your own earlier records, not a clinical target.</p></div></div>
+ <div id="twinMetrics" class="twin-metric-grid"><div class="twin-empty">Open this page when logged in to load your records.</div></div></section>
+ <div class="twin-two-up"><section class="twin-panel" aria-label="Personal health history"><div class="twin-kicker">02 · OVER TIME</div><h2>Personal health timeline</h2><p>30 days of available readings. Gaps mean no record was saved.</p><div class="twin-chart-controls"><label for="twinChartMetric">View indicator</label><select id="twinChartMetric"><option value="sleep">Sleep hours</option><option value="heart_rate">Resting heart rate</option><option value="oxygen">Oxygen saturation</option><option value="activity">Exercise</option><option value="mood">Mood & alertness index</option><option value="wearable_stress">Wearable stress</option></select></div><div class="twin-chart" id="twinChart" role="img" aria-label="Chart will load when measurements are available"></div><div id="twinChartCaption" class="twin-note"></div></section>
+ <section class="twin-panel" aria-label="Linked source records"><div class="twin-kicker">03 · CONNECTED SOURCES</div><h2>One astronaut, many inputs</h2><p>No record is generated by the Digital Twin itself.</p><div class="twin-source-grid" id="twinSources"></div><div class="twin-mini-hint">Sources are mixed: fictional daily records, simulated wearables, manual reports and imported values. They are not automatically verified.</div></section></div>
+ <section class="twin-panel twin-check-panel" id="twinMoodPanel" aria-label="Mood and alertness check in"><div class="twin-check-heading"><div><div class="twin-kicker">04 · MENTAL WELLBEING</div><h2>How are you feeling right now?</h2><p>A short, private check-in based on topics from the Cognition Alertness and Mood Survey research. It does not claim to reproduce the official survey or score.</p></div><div class="twin-chip">SELF-REPORT ONLY</div></div>
+ <div class="twin-mode-switch" role="group" aria-label="Choose questionnaire length"><button type="button" class="twin-mode active" data-twin-mode="quick" aria-pressed="true">Quick check-in · 5 questions</button><button type="button" class="twin-mode" data-twin-mode="extended" aria-pressed="false">Detailed check-in · 14 questions</button></div>
+ <form id="twinMoodForm" class="twin-mood-form"><div class="twin-question-grid" id="twinQuestions"></div><div class="twin-mood-extras"><label>Check-in date<input id="twinMoodDate" type="date" required></label><label>Went to sleep (optional)<input id="twinSleepStart" type="time"></label><label>Woke up (optional)<input id="twinSleepEnd" type="time"></label><label class="twin-note-box">Private notes (optional)<textarea id="twinMoodNotes" rows="2" maxlength="800" placeholder="What might have affected your mood or energy today?"></textarea></label></div>
+ <div class="twin-form-footer"><p id="twinMoodProgress" aria-live="polite">0 of 5 questions answered</p><button type="submit" class="button primary" id="twinMoodSave" disabled>Save private check-in →</button></div></form>
+ <div class="twin-disclaimer">Your score is an unvalidated OrbitLife prototype average of your answers. It is <strong>not</strong> the published weighted AMS-SD / AMS-LD score, a NASA clinical tool, or a diagnosis. Serious symptoms require established mission medical procedures.</div></section>
+ <div class="twin-two-up"><section class="twin-panel"><div class="twin-kicker">05 · YOUR PATTERN</div><h2>Changes since your baseline</h2><div id="twinObservations" class="twin-observations"><p>No historical comparison available.</p></div><button id="twinAskAI" class="button secondary" type="button">Discuss these trends with OrbitLife AI →</button><p class="twin-note">Offline AI uses rules. Connected AI requires an API key and should not make medical decisions.</p></section>
+ <section class="twin-panel"><div class="twin-kicker">06 · PERSONAL HISTORY</div><h2>Recent mood check-ins</h2><div id="twinMoodHistory" class="twin-history"><p>No check-ins yet.</p></div><p class="twin-note">A higher comfort index means fewer reported difficulties. Changes matter more than a single number.</p></section></div>
+ <details class="twin-panel twin-risk-library"><summary><span><span class="twin-kicker">07 · RESEARCH REFERENCE</span><strong>Spaceflight health risks & data sources</strong><small>12 research topics · based on the supplied Space Health App notes and NASA HRP</small></span><span>Explore topics +</span></summary><div id="twinRiskGrid" class="twin-risk-grid"></div><p class="twin-note">Reference material is not a personalized risk prediction. External medical devices, ultrasound or MRI have not been connected. Based on <a href="https://www.nasa.gov/hrp/risks/" target="_blank" rel="noopener noreferrer">NASA HRP risks</a> and <a href="https://doi.org/10.3390/app13042364" target="_blank" rel="noopener noreferrer">Pundyavana et al. (2023)</a>.</p></details>
+ <div class="twin-bottom-note">ORBITLIFE DIGITAL TWIN 20.0 · EDUCATIONAL PROTOTYPE · NOT FOR FLIGHT OR CLINICAL USE</div>
 </section>
 <section class="view" id="view-wearables">
 <div class="page-head"><div><div class="eyebrow">AUTOMATED PHYSIOLOGICAL DATA</div><h1>Wearable health</h1><p>Sleep, activity and recovery trends for the selected crew member.</p></div><span class="id-pill">WEARABLE FEED</span></div>

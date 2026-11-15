@@ -1,28 +1,15 @@
-# Local user data and API secrets
-OrbitLife_API_Key.txt
-DEMO_LOGINS_PRIVATE.txt
-DEMO_CREW_LOGINS.json
-DEMO_CREW_LOGINS.txt
+__pycache__/
+*.pyc
 *.sqlite3
 *.sqlite3-*
-*.db
 .env
-.env.*
-!.env.example
-*secret*
-*.pem
-*.key
-
-# Python and runtime caches
-__pycache__/
-*.py[cod]
-.pytest_cache/
-.venv/
-venv/
-*.log
-
-# Editor and OS
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
+*.env
+OrbitLife_API_Key.txt
+DEMO_CREW_LOGINS.json
+DEMO_CREW_LOGINS.txt
+DEMO_LOGINS_PRIVATE.txt
+terminal_cards.json
+developer_settings.json
+private_incident_photos/
+crew_avatars/
+developer_backups/

@@ -1,3 +1,6 @@
+ORBITLIFE 20.0 | DIGITAL TWIN + MOOD & ALERTNESS
+See README.md for updated installation and medical-safety information.
+
 ORBITLIFE 19.2  |  OLED + RFID AUTO LOGIN + ESP32 SETUP ON WELCOME
 
 1. Распакувајте го пакетот во нова папка.

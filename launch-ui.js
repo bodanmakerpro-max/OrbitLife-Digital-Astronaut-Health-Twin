@@ -1,6 +1,6 @@
 'use strict';
 /* OrbitLife 19: single touch + encoder menu shared by OLED and browser.
-   RFID selects Bodan for the local demo; never creates an authenticated session. */
+   Paired RFID cards authenticate through the server; older unpaired demo scans only select a profile. */
 (()=>{
   const q=id=>document.getElementById(id);
   const options={
@@ -101,7 +101,7 @@
       if(state.me){dismiss();window.goto('personal');return;}
       return openLogin(!!cardId,null);
     }
-    if(action==='emergency' || ['personal','daily','wearables','radiation','cortisol','body','medications','nutrition','records','assistant','crewprofile'].includes(action)){
+    if(action==='emergency' || ['personal','daily','wearables','radiation','cortisol','body','medications','nutrition','records','assistant','crewprofile','twin'].includes(action)){
       if(!state.me){openLogin(!!cardId,action);return;}
       if(cardId && state.me.user?.astronaut_id!==cardId){
         flash(tr('Sign out before entering another crew account.'),true);return;
@@ -143,7 +143,7 @@
     if(action==='dashboard'||action==='food'){window.goto(action==='food'?'menu':'crew');return true;}
     if(action==='login'){q('loginModal').classList.remove('hidden');return true;}
     if(action==='emergency' && state.me){reportEmergency();return true;}
-    if(state.me && ['personal','daily','wearables','radiation','cortisol','body','medications','nutrition','records','assistant','crewprofile'].includes(action)){window.goto(action);return true;}
+    if(state.me && ['personal','daily','wearables','radiation','cortisol','body','medications','nutrition','records','assistant','crewprofile','twin'].includes(action)){window.goto(action);return true;}
     return false;
   }
   function setup(){

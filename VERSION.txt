@@ -1,1 +1,3 @@
-OrbitLife 19.2 | USB ESP32 setup on Welcome Page | One-scan paired RFID login | Back to Welcome
+OrbitLife 20.0
+Personal Digital Twin + Mood Survey
+RFID + ESP32, AI and full existing modules preserved

@@ -218,7 +218,7 @@ async function orbitCompleteLogin(p,source='password'){
     }else if(pending.view==='emergency'){
       goto('crew');
       setTimeout(()=>{document.getElementById('olEmergencyFab')?.click();document.getElementById('olEmergencyReportChoice')?.click();},150);
-    }else if(['daily','radiation','body','medications','records','assistant'].includes(pending.view))goto(pending.view);
+    }else if(['daily','radiation','body','medications','records','assistant','twin'].includes(pending.view))goto(pending.view);
   }
   flash((source==='rfid'?'RFID signed in as ':'Logged in as ')+p.user.name);
 }
