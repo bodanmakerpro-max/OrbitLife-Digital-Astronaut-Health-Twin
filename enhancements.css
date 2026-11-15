@@ -1,0 +1,70 @@
+/* OrbitLife 10: fast, persistent emergency access and account-level preferences */
+:root{--ol-emergency:#e54856;--ol-emergency-darker:#ae2838}
+.ol-emergency-fab{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:50000;border:1px solid #ff9299;background:linear-gradient(145deg,#d83b4c,#a92133);color:#fff;display:flex;gap:9px;align-items:center;justify-content:center;padding:12px 18px;min-height:52px;font-size:14px;font-weight:850;box-shadow:0 8px 25px #0008,0 0 0 3px #9b202033;border-radius:15px;letter-spacing:.01em}
+.ol-emergency-fab:hover,.ol-emergency-fab:focus-visible{background:#f05262;outline:3px solid #fff;outline-offset:2px}
+.ol-emergency-fab span{white-space:nowrap}.ol-emergency-overlay{position:fixed;inset:0;z-index:50010;background:rgba(2,8,17,.8);display:grid;align-items:end;justify-items:end;padding:18px max(18px,env(safe-area-inset-right)) max(78px,env(safe-area-inset-bottom));backdrop-filter:blur(6px)}
+.ol-emergency-panel{height:min(85dvh,760px);width:min(540px,100%);max-width:100%;display:flex;flex-direction:column;overflow:hidden;border:1px solid #7e3648;border-radius:21px;background:var(--card);color:var(--ink);box-shadow:0 20px 75px #000b}
+.ol-emergency-header{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:18px 22px;background:linear-gradient(120deg,#702633,#341e30);border-bottom:1px solid #a64653}
+.ol-emergency-header small{display:block;color:#fbc3c7;font-size:10px;letter-spacing:.12em;font-weight:800}
+.ol-emergency-header h2{margin:4px 0 0;color:#fff;letter-spacing:-.03em;font-size:23px}
+.ol-close{color:#fff;background:#ffffff18;border:1px solid #ffffff55;border-radius:10px;min-width:42px;min-height:42px;font-size:28px}
+.ol-emergency-body{padding:20px 22px;overflow-y:auto;overscroll-behavior:contain;flex:1;min-height:0}
+.ol-emergency-body p{font-size:12px}.ol-emergency-crew{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.ol-picker-member{display:grid;grid-template-columns:46px 1fr;grid-template-rows:1fr 1fr;column-gap:10px;align-items:center;text-align:left;border:1px solid var(--line);border-radius:12px;background:var(--card2);color:var(--ink);padding:9px;min-width:0}
+.ol-picker-member:hover{border-color:var(--cyan);background:#17415a}.ol-picker-member img{width:46px;height:46px;object-fit:cover;border-radius:10px;grid-row:span 2}.ol-picker-member b{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ol-picker-member small{color:var(--muted);font-size:10px}
+.ol-card-identity{display:flex;align-items:center;gap:13px;margin-bottom:18px}.ol-card-identity img{width:76px;height:76px;object-fit:cover;border:2px solid var(--cyan);border-radius:14px}.ol-card-identity h3{margin:0}.ol-card-identity p{margin:3px 0}
+.ol-card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.ol-medical-item{border:1px solid var(--line);border-radius:11px;padding:13px;background:var(--card2);min-width:0}.ol-medical-item:nth-child(4){grid-column:1/-1}.ol-medical-item:nth-child(5){grid-column:1/-1}
+.ol-medical-item small{display:block;font-size:10px;color:var(--muted);margin-bottom:6px}.ol-medical-item strong{display:block;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.45}.ol-verify-note{margin:16px 0;color:var(--muted)}.ol-critical{display:inline-block;background:#a92d3f;color:#fff;padding:4px 8px;border-radius:6px;font-size:11px}
+.ol-emergency-actions{border-top:1px solid var(--line);padding:14px 20px;display:flex;gap:10px;flex-wrap:wrap;background:var(--card)}
+.button.warning{background:#c33645;color:#fff;border-color:#ee6774}.button.warning:hover{background:#dd4756}.ol-emergency-actions .button{flex:1;white-space:nowrap;font-size:11px}
+.ol-emergency-body .fields{display:grid;grid-template-columns:1fr}.ol-emergency-body .fields label{color:var(--ink);font-size:12px;font-weight:700}
+.ol-save-success{background:#12372e;border:1px solid #29886a;padding:15px;border-radius:13px;margin-top:14px}.ol-save-success strong{color:#b2f8d0}.ol-save-success p{margin:7px 0 12px}
+.ol-incidents-board{margin:16px 0 22px;border-left:3px solid #d74658}.ol-incidents-board h3{margin:0}.ol-incident-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.ol-incident{border:1px solid var(--line);border-radius:11px;padding:13px;background:var(--card2)}
+.ol-incident>div:first-child{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.ol-incident small{color:var(--muted)}.ol-incident p{font-size:12px;margin:8px 0}.ol-priority{display:inline-block;padding:4px 8px;border-radius:7px;background:#164536;color:#8cf3be;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.03em}.ol-priority.high{background:#613c1e;color:#ffd08c}.ol-priority.critical{background:#822538;color:#fff}.ol-priority.moderate{background:#3b435a;color:#d8e4ff}.ol-priority.simulation{background:#20354d;color:#aec0d2}.ol-priority.normal{background:#164536;color:#8cf3be}
+.ol-incident-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:8px}.ol-incident-actions button{min-height:32px;padding:5px 10px}.ol-incident-photo{max-width:100%;width:90px;height:68px;object-fit:cover;border-radius:8px}.ol-small-upload{font-size:11px;cursor:pointer;position:relative;overflow:hidden;color:var(--cyan)}.ol-small-upload input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.ol-profile-emergency{display:flex;justify-content:space-between;align-items:center;gap:16px;border-radius:14px;border:1px solid #87364b;border-left:4px solid #e54856;background:linear-gradient(100deg,#482634,#142334);padding:16px 19px;margin-bottom:17px}
+.ol-profile-emergency>div{display:grid;gap:5px}.ol-kicker{font-size:10px;font-weight:850;color:#f0a0ad;letter-spacing:.08em}.ol-profile-emergency strong{color:#fff;font-size:15px}.ol-profile-emergency small{color:#e1c5cf;font-size:11px}
+.ol-timeline{margin-bottom:17px}.ol-timeline-event{display:flex;gap:14px;border-bottom:1px solid var(--line);padding:11px 0}.ol-timeline-event p{margin:4px 0}.ol-timeline-event small{font-size:10px;color:var(--muted)}
+.ol-preferences{margin-top:16px}.ol-buttons{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.ol-checkbox{display:flex!important;gap:10px;align-items:center}.ol-checkbox input{width:auto!important;margin:0!important;accent-color:var(--cyan)}.ol-crew-status{margin:9px 0 0;font-style:italic;color:#a2bcca!important;font-size:12px!important}
+.ol-hormone-chart{min-height:185px;padding:20px 5px 3px;display:flex;align-items:end;overflow-x:auto}.ol-cortisol-bars{width:100%;min-width:max-content;display:flex;align-items:end;gap:11px;height:178px}.ol-cortisol-point{width:46px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;height:100%;text-align:center}.ol-cortisol-point span{font-size:10px;color:var(--ink)}.ol-cortisol-point i{width:23px;display:block;border-radius:6px 6px 0 0;background:linear-gradient(#20dfe4,#297bcb)}.ol-cortisol-point i.is-simulated{background:repeating-linear-gradient(135deg,#526f90,#526f90 6px,#2c4a62 6px,#2c4a62 12px)}.ol-cortisol-point small{font-size:10px;color:var(--muted)}.ol-cortisol-entry{border-bottom:1px solid var(--line);padding:11px 0}.ol-cortisol-entry strong{font-size:15px}.ol-cortisol-entry p{margin:4px 0}.ol-cortisol-entry small{font-size:11px;color:var(--muted)}
+body[data-ol-theme="light"]{--bg:#f2f7fb;--side:#eaf2f7;--card:#fff;--card2:#eef5fb;--line:#b9ccd9;--ink:#163246;--muted:#537186;background:var(--bg);color:var(--ink)}
+body[data-ol-theme="light"] .sidebar{background:#e9f2f7;border-color:#c5d4e0}
+body[data-ol-theme="light"] .main,body[data-ol-theme="light"] .panel,body[data-ol-theme="light"] .summary-card,body[data-ol-theme="light"] .metric,body[data-ol-theme="light"] .crew-card,body[data-ol-theme="light"] .callout{background:#fff;color:#163246;border-color:#c6d5e1}
+body[data-ol-theme="light"] p,body[data-ol-theme="light"] .panel p,body[data-ol-theme="light"] .crew-action{color:#4f6c81}
+body[data-ol-theme="light"] input,body[data-ol-theme="light"] select,body[data-ol-theme="light"] textarea{background:#fff;color:#173246;border-color:#9fb8c8}
+body[data-ol-theme="light"] .navitem,body[data-ol-theme="light"] .nav-group summary{color:#29485b}
+body[data-ol-theme="light"] .navitem.active{background:#d5f0f4;color:#115466}
+body[data-ol-theme="light"] .ol-emergency-panel,body[data-ol-theme="light"] .ol-emergency-actions{background:#fff}
+body[data-ol-theme="light"] .ol-picker-member,body[data-ol-theme="light"] .ol-medical-item,body[data-ol-theme="light"] .ol-incident{background:#f3f7fa}
+body[data-ol-theme="light"] .ol-profile-emergency{background:#fff1f2}
+body[data-ol-theme="light"] .ol-profile-emergency strong{color:#741c30}
+body[data-ol-theme="light"] .ol-profile-emergency small{color:#6c4252}
+body[data-ol-theme="light"] .result{background:#eef8fc;color:#234152}
+body[data-ol-theme="light"] .header-right,body[data-ol-theme="light"] .breadcrumb{color:#355366}
+body[data-ol-theme="light"] .button.secondary{background:#edf4f8;color:#21485d;border-color:#a2c0ce}
+body[data-ol-theme="light"] .hero,body[data-ol-theme="light"] .portal-hero{color:#fff}
+body[data-ol-theme="light"] .hero p,body[data-ol-theme="light"] .hero small{color:#e5f0f9}
+body[data-ol-theme="light"] .hero .eyebrow{color:#a1f6ff}
+@media(max-width:750px){.ol-emergency-fab{right:12px;bottom:12px;min-height:54px;padding:10px 14px}.ol-emergency-overlay{padding:8px 8px 73px;justify-items:stretch}.ol-emergency-panel{width:100%;height:min(80dvh,730px);border-radius:17px}.ol-emergency-crew{grid-template-columns:repeat(2,minmax(0,1fr))}.ol-card-grid,.ol-incident-items{grid-template-columns:1fr}.ol-emergency-body{padding:17px}.ol-emergency-header{padding:16px}.ol-emergency-actions{gap:7px;padding:11px}.ol-emergency-actions .button{padding:9px;min-width:0}.ol-profile-emergency{flex-direction:column;align-items:stretch}.ol-incidents-board{padding:14px}}
+@media(max-width:370px){.ol-emergency-fab span{font-size:12px}.ol-picker-member{grid-template-columns:36px 1fr;padding:7px}.ol-picker-member img{height:36px;width:36px}.ol-picker-member b{font-size:11px}.ol-emergency-header h2{font-size:20px}}
+/* Light theme contrast refinements for legacy widgets and new medical panels */
+body[data-ol-theme="light"] .grouped-nav .nav-group,
+body[data-ol-theme="light"] .nav-group{background:#e6f1f7!important;border-color:#c1d6e2!important}
+body[data-ol-theme="light"] .nav-group summary,
+body[data-ol-theme="light"] .nav-group .navitem{color:#305268!important}
+body[data-ol-theme="light"] .nav-group .navitem.active{color:#006379!important;background:#d2eaf0!important}
+body[data-ol-theme="light"] .sidebar-bottom{background:#deebf3;color:#1f4156;border-color:#b6d1df}
+body[data-ol-theme="light"] .sidebar-bottom p,
+body[data-ol-theme="light"] .sidebar-info-link{color:#27627a}
+body[data-ol-theme="light"] .settings-profile{background:#e5f2f8!important;border:1px solid #bad5e4!important;color:#173246!important}
+body[data-ol-theme="light"] .settings-profile b,
+body[data-ol-theme="light"] .settings-profile small{color:#163749!important}
+body[data-ol-theme="light"] .panel label,
+body[data-ol-theme="light"] .panel .fine,
+body[data-ol-theme="light"] .record small{color:#466b81}
+body[data-ol-theme="light"] .ol-incident small,
+body[data-ol-theme="light"] .ol-cortisol-entry small{color:#4a6e83}
+body[data-ol-theme="light"] .ol-card-identity p,
+body[data-ol-theme="light"] .ol-emergency-body p{color:#506b7a}
+body[data-ol-theme="light"] .header .button.ghost{color:#21485d;border-color:#a2c0ce}
+body[data-ol-theme="light"] .app{background:#f4f8fb}

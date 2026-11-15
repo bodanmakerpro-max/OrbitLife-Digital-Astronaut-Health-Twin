@@ -1,0 +1,42 @@
+/* OrbitLife Developer Tools: compact, accessible, commander-only controls */
+.ol-dev-nav.hidden{display:none!important}
+.ol-dev-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.ol-dev-card{min-width:0;padding:24px;border-radius:var(--radius)}
+.ol-dev-wide{grid-column:1/-1}
+.ol-dev-card-title{display:flex;align-items:start;gap:13px;margin-bottom:20px}
+.ol-dev-card-title h2{font-size:19px;margin:2px 0 6px;color:var(--ink)}
+.ol-dev-card-title p{font-size:12px;margin:0}
+.ol-dev-icon{width:42px;height:42px;background:var(--card2);border:1px solid var(--line);display:grid;place-items:center;color:var(--cyan);border-radius:12px;font-size:23px;flex:none}
+.ol-dev-fields{display:grid;gap:15px}
+.ol-dev-fields label,.ol-dev-record-grid label{display:grid;gap:7px;color:var(--ink);font-size:12px;font-weight:750;min-width:0}
+.ol-dev-fields select,.ol-dev-fields input:not([type=checkbox]):not([type=range]),.ol-dev-record-grid select,.ol-dev-record-grid input{width:100%;min-height:42px;padding:8px 12px;color:var(--ink);background:var(--card2);border:1px solid var(--line);border-radius:9px}
+.ol-dev-fields input[type=color]{height:51px;padding:5px!important;cursor:pointer}
+.ol-dev-fields input[type=range]{width:100%;accent-color:var(--cyan)}
+.ol-dev-fields input[type=checkbox]{accent-color:var(--cyan);width:19px;height:19px}
+.ol-dev-inline{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.ol-dev-inline .ol-check{display:flex;align-items:center;gap:9px;flex:1}
+.ol-device-status{background:var(--card2);color:var(--ink);padding:13px 14px;border:1px solid var(--line);border-radius:11px;margin:10px 0 18px;font-size:12px;font-weight:650}
+.ol-device-status.connected{border-color:var(--green)}
+.ol-dev-readout{background:var(--card2);border:1px solid var(--line);padding:10px 12px;color:var(--muted);font-size:12px;border-radius:9px;margin:15px 0}
+.ol-swatches{display:flex;gap:9px}
+.ol-swatches button{width:36px;height:36px;border:2px solid var(--line);background:var(--swatch);border-radius:50%;box-shadow:0 0 0 2px var(--card);cursor:pointer}
+.ol-swatches button:hover,.ol-swatches button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.ol-dev-record-grid{display:grid;grid-template-columns:1.2fr 1.1fr 1fr auto;gap:10px;align-items:end}
+.ol-dev-record-grid button{height:42px}
+.ol-dev-records{margin-top:17px;display:grid;gap:10px;max-height:400px;overflow:auto}
+.ol-dev-record-row{border:1px solid var(--line);background:var(--card2);border-radius:11px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.ol-dev-record-row div{min-width:0;overflow-wrap:anywhere}
+.ol-dev-record-row b{color:var(--ink);display:block;font-size:12px}.ol-dev-record-row small{color:var(--muted);display:block;font-size:11px;margin-top:5px}
+.ol-dev-record-row button{flex:none;min-height:36px;border:1px solid var(--red);background:transparent;color:var(--red);border-radius:8px;padding:6px 11px;font-weight:750}
+.ol-dev-record-row button:hover{background:rgba(210,30,60,.12)}
+.ol-dev-card .fine{font-size:11px;color:var(--muted);margin-top:12px;line-height:1.55}
+body.ol-density-compact .panel{padding:15px}body.ol-density-compact .navitem{min-height:33px;padding:7px 10px}body.ol-density-compact .main{padding-top:15px}body.ol-density-compact .crew-card{padding:11px}
+@media(max-width:1060px){.ol-dev-grid{grid-template-columns:1fr}.ol-dev-wide{grid-column:auto}.ol-dev-record-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){.ol-dev-card{padding:16px}.ol-dev-record-grid{grid-template-columns:1fr}.ol-dev-record-row{align-items:start}}
+
+.ol-dev-test-controls{margin-top:10px}.ol-dev-test-controls .button{font-size:12px}
+
+.ol-dev-demo-label{display:flex;gap:12px;align-items:flex-start;background:var(--card2);border:1px solid var(--line);padding:14px;border-radius:13px;margin:14px 0}
+.ol-dev-demo-label input{width:18px;height:18px;flex:none;accent-color:var(--cyan);margin-top:3px}
+.ol-dev-demo-label strong{display:block;font-size:13px;color:var(--ink)}
+.ol-dev-demo-label small{display:block;font-size:11px;color:var(--muted);line-height:1.5;margin-top:5px}
