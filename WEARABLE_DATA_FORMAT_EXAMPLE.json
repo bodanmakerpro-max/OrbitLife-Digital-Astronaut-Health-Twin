@@ -1,0 +1,4 @@
+[
+  {"date":"2026-11-12", "resting_hr":60, "sleep_hours":7.8, "sleep_score":83, "steps":9200, "active_minutes":105, "stress_score":23, "body_battery":85, "spo2":97.8, "hrv_ms":53, "calories_burned":2610},
+  {"date":"2026-11-13", "resting_hr":61, "sleep_hours":7.5, "sleep_score":79, "steps":8400, "active_minutes":96, "stress_score":27, "body_battery":80, "spo2":97.5, "hrv_ms":51, "calories_burned":2530}
+]

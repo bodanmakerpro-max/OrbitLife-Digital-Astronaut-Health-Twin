@@ -1,0 +1,1 @@
+OrbitLife 19.2 | USB ESP32 setup on Welcome Page | One-scan paired RFID login | Back to Welcome

@@ -1,0 +1,22 @@
+
+/* High-visibility announcements, without exposing health details to guests. */
+.ol-alerts-public{border:1px solid #e17d75;border-left:5px solid #ff544f;background:#382025;color:#ffebec;border-radius:13px;padding:14px 18px;margin:12px 0 20px;box-shadow:0 8px 26px #04091533}
+.ol-alerts-public.hidden{display:none!important}
+.ol-alerts-title{font-size:15px;font-weight:850;color:#fff3f4}
+.ol-alerts-count{font-size:12px;color:#ffbcb7;margin:4px 0 10px}
+.ol-alerts-items{display:flex;flex-wrap:wrap;gap:7px}
+.ol-alerts-item{display:flex;align-items:center;gap:8px;flex-wrap:wrap;border:1px solid #8b4653;border-radius:9px;background:#422e37;padding:8px 11px;min-height:35px}
+.ol-alerts-item strong{font-size:13px;color:white}
+.ol-alerts-item time{font-size:11px;color:#eac2c7}
+.ol-alerts-urgency{text-transform:uppercase;font-size:10px;font-weight:800;color:#ffdad4}
+.ol-alerts-urgency.critical{color:#ffd48b}
+.ol-alert-private-note{font-size:11px;color:#eec4c6;margin:9px 0 0}
+.ol-alerts-public button{margin-top:12px}
+.ol-launch-screen .ol-alerts-public{margin:0 0 16px;padding:10px 13px;max-width:460px}
+body[data-ol-theme="light"] .ol-alerts-public{color:#771d29;background:#fff0f0;border-color:#e68994}
+body[data-ol-theme="light"] .ol-alerts-title{color:#811c2c}
+body[data-ol-theme="light"] .ol-alerts-count,body[data-ol-theme="light"] .ol-alert-private-note{color:#8d3440}
+body[data-ol-theme="light"] .ol-alerts-item{background:#fff9f9;border-color:#e5b4bb}
+body[data-ol-theme="light"] .ol-alerts-item strong{color:#5b2630}
+body[data-ol-theme="light"] .ol-alerts-item time{color:#733a45}
+body[data-ol-theme="light"] .ol-alerts-urgency{color:#952232}
