@@ -83,7 +83,7 @@ Offline answers|Одговори без интернет|Réponses hors ligne|А
 Connected AI (requires API credits)|Поврзана вештачка интелигенција (потребни се кредити)|Intelligence artificielle connectée (crédits requis)|Подключённый ИИ (нужны средства)
 Offline Quick AI|Општ помошник без интернет|Assistant général hors ligne|Общий автономный помощник
 Mode|Режим|Mode|Режим
-Ask about today's menu, nutrition, radiation or using OrbitLife.|Прашај за денешното мени, исхрана, зрачење или користењето на OrbitLife.|Posez une question sur les repas, la nutrition ou les radiations.|Спросите о меню, питании, радиации или приложении.
+Ask about today's menu, nutrition, radiation or using PulseDeck.|Прашај за денешното мени, исхрана, зрачење или користењето на PulseDeck.|Posez une question sur les repas, la nutrition ou les radiations.|Спросите о меню, питании, радиации или приложении.
 Emergency|Итно|Urgence|Экстренно
 Emergency access|Итен пристап|Accès d’urgence|Экстренный доступ
 Report an emergency|Пријави итен случај|Signaler une urgence|Сообщить о происшествии
@@ -337,13 +337,13 @@ Monitor.|надзор на мисијата.|intelligente de mission.|систе
 USB RFID SUPPORT|ПОДДРШКА ЗА КАРТИЧКИ|LECTEUR DE CARTES SANS CONTACT|ПОДДЕРЖКА БЕСКОНТАКТНЫХ КАРТ
 TOUCH + ENCODER|ЕКРАН НА ДОПИР И ВРТЛИВО КОПЧЕ|ÉCRAN TACTILE ET MOLETTE|СЕНСОРНЫЙ ЭКРАН И РУЧКА
 USB ACCESS · NO LCD REQUIRED|ПРИСТАП ПРЕКУ УСБ · НЕ Е ПОТРЕБЕН ПОСЕБЕН ДИСПЛЕЈ|ACCÈS USB · AUCUN ÉCRAN SUPPLÉMENTAIRE REQUIS|ДОСТУП ЧЕРЕЗ USB · ОТДЕЛЬНЫЙ ЭКРАН НЕ НУЖЕН
-ORBITLIFE · CREW HEALTH|ORBITLIFE · ЗДРАВЈЕ НА ЕКИПАЖОТ|ORBITLIFE · SANTÉ DE L’ÉQUIPAGE|ORBITLIFE · ЗДОРОВЬЕ ЭКИПАЖА
+PULSEDECK · CREW HEALTH|PULSEDECK · ЗДРАВЈЕ НА ЕКИПАЖОТ|PULSEDECK · SANTÉ DE L’ÉQUIPAGE|PULSEDECK · ЗДОРОВЬЕ ЭКИПАЖА
 USB RFID SUPPORT|ПОДДРШКА ЗА БЕСКОНТАКТНИ КАРТИЧКИ|LECTEUR DE CARTES SANS CONTACT|ПОДДЕРЖКА БЕСКОНТАКТНЫХ КАРТ
 Crew overview|Преглед на екипажот|Présentation de l’équipage|Обзор экипажа
 Sign in to a private account|Најави се на лична сметка|Se connecter à un compte privé|Войти в личную учётную запись
 Crew health platform|Платформа за здравјето на екипажот|Plateforme de santé de l’équipage|Платформа здоровья экипажа
 Mission-ready interface|Системот е подготвен за мисијата|Système prêt pour la mission|Система готова к миссии
-ORBITLIFE / EXPEDITION 01|ORBITLIFE / ЕКСПЕДИЦИЈА 01|ORBITLIFE / EXPÉDITION 01|ORBITLIFE / ЭКСПЕДИЦИЯ 01
+PULSEDECK / EXPEDITION 01|PULSEDECK / ЕКСПЕДИЦИЈА 01|PULSEDECK / EXPÉDITION 01|PULSEDECK / ЭКСПЕДИЦИЯ 01
 Mission commander · AST-001|Командир на мисијата · AST-001|Commandant de mission · AST-001|Командир миссии · AST-001
 Mission Monitor|Надзор на мисијата|Suivi de mission|Контроль миссии
 Welcome back, astronaut.|Добре дојде повторно, астронауте.|Bon retour, astronaute.|С возвращением, астронавт.

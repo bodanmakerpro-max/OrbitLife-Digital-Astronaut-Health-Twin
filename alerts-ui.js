@@ -41,7 +41,7 @@
    const res=await fetch('/api/public-alerts',{credentials:'same-origin',cache:'no-store'});
    if(!res.ok)throw new Error('Cannot load emergency announcements');
    lastData=await res.json();render();
-  }catch(err){console.warn('OrbitLife public alerts unavailable',err);}finally{busy=false;}}
+  }catch(err){console.warn('PulseDeck public alerts unavailable',err);}finally{busy=false;}}
  function init(){window.OrbitLifeAlertsRefresh=refresh;refresh();setInterval(()=>{if(document.visibilityState==='visible')refresh();},9000);
   window.addEventListener('orbitlife:locale-changed',render);
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refresh();});

@@ -1,4 +1,4 @@
-"""OrbitLife 10 add-on APIs: medical emergency cards, incidents, personal settings, cortisol.
+"""PulseDeck 10 add-on APIs: medical emergency cards, incidents, personal settings, cortisol.
 Local educational mission prototype. Medical verification is explicit and separate from personal notes.
 """
 import datetime as dt
@@ -69,7 +69,7 @@ def seed_cortisol(db):
             timestamp=(dt.datetime.now(dt.timezone.utc)-dt.timedelta(days=days)).replace(hour=7+(i%2),minute=15,second=0,microsecond=0).isoformat(timespec='seconds')
             db.execute('''INSERT INTO cortisol(user_id,collected_at,since_waking_min,result,units,source,source_detail,simulated,entered_by,entered_at)
               VALUES(?,?,?,?,?,?,?,?,?,?)''',(u['id'],timestamp,45+(i%3)*15,round(9.1+i*.27+(12-days)*.14,2),
-                'nmol/L','simulation','Synthetic example, not a laboratory result',1,'OrbitLife demo generator',utcnow()))
+                'nmol/L','simulation','Synthetic example, not a laboratory result',1,'PulseDeck demo generator',utcnow()))
 
 
 def format_card(db, row):
@@ -206,7 +206,7 @@ def post(handler,db,user,path,data):
         return None,False
     if path=='/api/cortisol/device':
         secret=os.environ.get('ORBITLIFE_CORTISOL_DEVICE_TOKEN','')
-        supplied=handler.headers.get('X-OrbitLife-Device-Key','')
+        supplied=handler.headers.get('X-PulseDeck-Device-Key','')
         if len(secret)<24 or not hmac.compare_digest(supplied,secret):return handler.send(403,{'error':'Validated device connector is not configured or unauthorized.'}),True
         device=clean(data.get('device_id'),100)
         if not device:return handler.send(400,{'error':'Validated device ID is required.'}),True

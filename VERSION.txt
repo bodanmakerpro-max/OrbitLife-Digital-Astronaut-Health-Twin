@@ -1,4 +1,3 @@
-OrbitLife 20.1
-Personal Digital Twin + Mood Survey
-RFID + ESP32, AI and full existing modules preserved
-KY-040 interrupt navigation: one detent = one menu item
+PulseDeck 20.2
+Formerly OrbitLife. Public brand renamed. Existing data and interfaces preserved.
+ESP32 OLED/encoder firmware retained.

@@ -1,4 +1,4 @@
-/* OrbitLife 10: fast, persistent emergency access and account-level preferences */
+/* PulseDeck 10: fast, persistent emergency access and account-level preferences */
 :root{--ol-emergency:#e54856;--ol-emergency-darker:#ae2838}
 .ol-emergency-fab{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:50000;border:1px solid #ff9299;background:linear-gradient(145deg,#d83b4c,#a92133);color:#fff;display:flex;gap:9px;align-items:center;justify-content:center;padding:12px 18px;min-height:52px;font-size:14px;font-weight:850;box-shadow:0 8px 25px #0008,0 0 0 3px #9b202033;border-radius:15px;letter-spacing:.01em}
 .ol-emergency-fab:hover,.ol-emergency-fab:focus-visible{background:#f05262;outline:3px solid #fff;outline-offset:2px}

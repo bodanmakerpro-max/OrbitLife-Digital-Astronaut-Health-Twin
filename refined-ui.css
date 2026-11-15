@@ -1,4 +1,4 @@
-/* OrbitLife 13.0: calm, information-first interface and readable light mode */
+/* PulseDeck 13.0: calm, information-first interface and readable light mode */
 :root{--ol-ring:rgba(41,203,225,.13)}
 body{font-size:14px}
 .main{max-width:100%;overflow-x:hidden}
@@ -126,7 +126,7 @@ body[data-ol-theme="light"] .portal-hero button.primary,
 body[data-ol-theme="light"] .portal-hero .primary{color:#ffffff!important}
 
 
-/* OrbitLife 15 refinements */
+/* PulseDeck 15 refinements */
 .page-head.personal-identity{align-items:center;background:linear-gradient(160deg,#10283d,#0c2032);border:1px solid var(--line);border-radius:18px;padding:18px 22px;margin-top:8px}
 .page-head.personal-identity h1{margin:4px 0 6px;font-size:clamp(24px,2.7vw,36px)}
 .page-head.personal-identity p{margin:0;color:var(--ink);opacity:.88;font-size:13px}
@@ -146,7 +146,7 @@ body[data-ol-theme="light"] .page-head.personal-identity p{color:#25465d}
 body[data-ol-theme="light"] .ol-personal-chip{background:#f6fbff;border-color:#d6e6f3}
 @media(max-width:780px){.page-head.personal-identity{padding:16px}.page-head.personal-identity .id-pill{width:100%;justify-content:center}.ol-personal-quickfacts{width:100%}.ol-personal-chip{flex:1 1 calc(50% - 8px);min-width:0}}
 
-/* OrbitLife 19.2: full module directory on home. */
+/* PulseDeck 19.2: full module directory on home. */
 .ol-home-tools{border:1px solid var(--line);border-radius:13px;background:var(--card);margin:13px 0;overflow:hidden}
 .ol-home-tools>summary{cursor:pointer;display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:15px 18px;font-size:14px;color:var(--ink);font-weight:750}
 .ol-home-tools>summary span{font-size:12px;font-weight:500;color:var(--muted)}

@@ -1,5 +1,5 @@
 'use strict';
-/* OrbitLife 13: calmer homepage, records search and accessible interaction updates. */
+/* PulseDeck 13: calmer homepage, records search and accessible interaction updates. */
 (() => {
   const el=id=>document.getElementById(id);
   const escapeText=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));

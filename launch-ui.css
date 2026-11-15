@@ -1,4 +1,4 @@
-/* OrbitLife 16 / Smart Mission Monitor - touchscreen-first entry kiosk */
+/* PulseDeck 16 / Smart Mission Monitor - touchscreen-first entry kiosk */
 .ol-launch-screen{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;overflow:auto;padding:clamp(12px,3vw,36px);color:#e9f8ff;background:radial-gradient(circle at 76% 20%,rgba(25,164,201,.18),transparent 34%),radial-gradient(circle at 7% 86%,rgba(30,85,132,.22),transparent 40%),#071521;font-family:inherit}
 .ol-launch-screen.hidden{display:none!important}
 .ol-launch-screen *{box-sizing:border-box}
@@ -89,7 +89,7 @@ body.ol-launch-active{overflow:hidden}
 .ol-login-rfid-status{margin-top:9px;color:var(--muted,#647d92)}
 @media(max-width:810px){.ol-esp-setup summary{padding:14px 19px}.ol-esp-form{padding:0 19px 18px}}
 
-/* OrbitLife 19.2: restore full navigation without changing OLED firmware shortcuts. */
+/* PulseDeck 19.2: restore full navigation without changing OLED firmware shortcuts. */
 .ol-launch-alltools{border-top:1px solid #31586d;background:#102b3e;color:#e3f9ff}
 .ol-launch-alltools>summary{padding:15px 30px;cursor:pointer;font-size:13px;font-weight:800;display:flex;justify-content:space-between;gap:14px;align-items:center}
 .ol-launch-alltools>summary span{font-size:11px;color:#93c2d5;font-weight:500}

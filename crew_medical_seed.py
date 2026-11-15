@@ -1,4 +1,4 @@
-"""Fictional crew medical background for the OrbitLife showcase.
+"""Fictional crew medical background for the PulseDeck showcase.
 All fields are unverified sample records; verified emergency fields are NEVER set here.
 Only fills empty values and never overwrites user-entered clinical data.
 """

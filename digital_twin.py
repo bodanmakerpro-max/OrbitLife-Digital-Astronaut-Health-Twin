@@ -1,4 +1,4 @@
-"""OrbitLife Digital Twin v20: transparent, educational trends and AMS-inspired check-ins.
+"""PulseDeck Digital Twin v20: transparent, educational trends and AMS-inspired check-ins.
 
 No clinical scores, diagnoses, predictive risk estimates or approved NASA AMS-SD/LD
 weights are claimed. Data stays in the user's local SQLite store.
@@ -39,7 +39,7 @@ RISK_LIBRARY = [
     {'name':'Reduced physical fitness', 'signals':'Exercise and wearable activity trends', 'note':'Activity is not a measure of fitness on its own.'},
     {'name':'Urinary and reproductive health', 'signals':'Symptoms and private medical notes', 'note':'No dedicated automatic monitoring is claimed.'},
     {'name':'Radiation exposure', 'signals':'Dosimeter entries and cumulative dose', 'note':'Only imported or entered readings are displayed.'},
-    {'name':'Bone-density loss', 'signals':'Exercise and externally provided bone measurements', 'note':'OrbitLife cannot infer bone density or fractures from these inputs.'},
+    {'name':'Bone-density loss', 'signals':'Exercise and externally provided bone measurements', 'note':'PulseDeck cannot infer bone density or fractures from these inputs.'},
 ]
 
 
@@ -112,7 +112,7 @@ def save_mood(db, user_id, data, now):
     db.execute('''INSERT INTO twin_mood(user_id,recorded_at,mission_date,mode,responses_json,notes,sleep_start,sleep_end,self_report_index)
        VALUES(?,?,?,?,?,?,?,?,?)''', (user_id, now, date, mode, json.dumps(answers, separators=(',', ':')),note,*times,index))
     return {'ok':True,'index':index,'mode':mode,'recorded_at':now,
-            'disclaimer':'Experimental OrbitLife self-report index. Not the published weighted NASA Cognition AMS score or a medical assessment.'}
+            'disclaimer':'Experimental PulseDeck self-report index. Not the published weighted NASA Cognition AMS score or a medical assessment.'}
 
 
 def values_for(db, query, uid, *params):
@@ -192,7 +192,7 @@ def get_twin(db, user_id):
             'mood':count_rows('twin_mood'),'radiation':radiation['n'],
             'symptoms':count_rows('symptoms'),'diet':dietary['n'],
             'medications':meds['n'],'cortisol':cortisol['n']}
-    return {'identity':dict(person),'model':'OrbitLife Personal Digital Twin 20.0',
+    return {'identity':dict(person),'model':'PulseDeck Personal Digital Twin 20.0',
         'mission':{'scenario':'Lunar South Pole research scenario','duration_days':30,'mode':'Educational demonstration'},
         'updated_at':dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds'),
         'metrics':metrics,'daily_history':history,'mood_history':mood,'observations':observations,
@@ -200,4 +200,4 @@ def get_twin(db, user_id):
         'notes':['A linked view of stored records, not a physiological simulation or clinically validated prediction.',
                  'Measurements may be fictional, self-reported, simulated or imported. Always inspect the source.',
                  'No automatic bone density, infection diagnosis, EVA safety rating or radiation risk calculation.',
-                 'OrbitLife comfort score is an unweighted prototype index, not the research team’s AMS-SD/AMS-LD.']}
+                 'PulseDeck comfort score is an unweighted prototype index, not the research team’s AMS-SD/AMS-LD.']}

@@ -1,4 +1,4 @@
-"""USB-only serial link for the OrbitLife RC522 + encoder terminal.
+"""USB-only serial link for the PulseDeck RC522 + encoder terminal.
 Paired physical RFID scans can authorize one-time sessions in this local DEMO.
 No Wi-Fi or LAN listener.
 """

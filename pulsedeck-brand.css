@@ -1,0 +1,8 @@
+/* PulseDeck branding only. Keep component APIs, navigation and medical data intact. */
+.ol-launch-brand .pulsedeck-logo{display:block;width:182px;height:56px;max-width:45vw;object-fit:contain;object-position:left center;flex:0 0 auto}
+.ol-launch-brand .pulsedeck-launch-label{font-size:10px;letter-spacing:.15em;color:#a6cbda;font-weight:750}
+.pulsedeck-sidebar-icon{width:44px;height:44px;object-fit:cover;border:1px solid #2c5b76;background:#0d2b3f;border-radius:12px;padding:3px;flex:0 0 44px}
+.sidebar .brand-title{letter-spacing:-1px}
+@media(max-width:720px){.ol-launch-brand .pulsedeck-logo{width:145px;height:45px}.ol-launch-brand .pulsedeck-launch-label{display:none}}
+body[data-ol-theme="light"] .pulsedeck-sidebar-icon{background:#eaf3f9;border-color:#bdd7e5}
+body[data-ol-theme="light"] .sidebar .brand-title{color:#17354b}

@@ -158,7 +158,7 @@ body.logged-in .summary-row{grid-template-columns:repeat(4,minmax(0,1fr))}
 @media(max-width:580px){.crew-filters button{font-size:10px;padding:7px 8px}.crew-toolbar{padding:11px}.crew-toolbar label{min-width:100%}}
 
 
-/* OrbitLife 7: focused, accessible mission workspace */
+/* PulseDeck 7: focused, accessible mission workspace */
 :root{--bg:#070f1b;--side:#0a1726;--card:#101e30;--line:#283d52;--cyan:#50d9e1;--ink:#f0f7fd;--muted:#a1b3c5;--radius:16px}
 body{background:radial-gradient(circle at 85% -5%,#133347 0,transparent 35%),#080f1b;color:var(--ink)}
 .sidebar{border-right:1px solid #20374b;gap:18px}
@@ -219,7 +219,7 @@ body{background:radial-gradient(circle at 85% -5%,#133347 0,transparent 35%),#08
 .guide-grid b{font-size:12px;color:#e5f7f8}.guide-grid p{font-size:11px;margin:5px 0 0;line-height:1.55}
 @media(max-width:600px){.guide-grid{grid-template-columns:1fr}.trend-select-label{margin-top:3px!important}}
 
-/* OrbitLife 8 - wearables and crew profiles */
+/* PulseDeck 8 - wearables and crew profiles */
 .wearable-notice{padding:18px 20px;background:linear-gradient(110deg,#11394c,#0e2739);border:1px solid #28617a;border-radius:15px;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}
 .wearable-notice b{font-size:15px}.wearable-notice p{margin:5px 0 0;font-size:12px}.source-flag{color:#a0f0f3;border:1px solid #367b86;padding:6px 11px;border-radius:999px;font-size:10px;font-weight:850;white-space:nowrap}
 .wearables-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin:0 0 16px}
@@ -232,7 +232,7 @@ body{background:radial-gradient(circle at 85% -5%,#133347 0,transparent 35%),#08
 @media(max-width:850px){.wearables-toolbar,.wearable-notice{align-items:flex-start}.wearable-notice{flex-direction:column}.wearable-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.wearable-main{grid-template-columns:1fr}.profile-top{align-items:flex-start}.profile-top>img{width:105px;height:105px;flex-basis:105px}.profile-top h2{font-size:23px}}
 @media(max-width:520px){.wearable-controls{width:100%}.wearable-controls>*{flex:1}.profile-top{flex-direction:column}.profile-facts{grid-template-columns:1fr}.wearable-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.wearable-metrics .metric{padding:14px}.wearable-metrics .metric strong{font-size:21px}}
 
-/* OrbitLife RFID + rotary encoder enhancements */
+/* PulseDeck RFID + rotary encoder enhancements */
 .terminal-pair {margin-top:24px;padding:18px 22px}
 .terminal-pair summary {cursor:pointer;font-weight:650}
 .terminal-pair-controls {display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}

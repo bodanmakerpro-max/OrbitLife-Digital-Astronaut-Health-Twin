@@ -1,4 +1,4 @@
-"""OrbitLife shared menu, confirmed intake, and exposure review for fictional training crew.
+"""PulseDeck shared menu, confirmed intake, and exposure review for fictional training crew.
 Nutrient figures are illustrative food-entry estimates, NOT certified ISS food-label values.
 Plans are proposed only; a consumption confirmation creates an actual diet log.
 """
@@ -51,7 +51,7 @@ def setup(db):
     db.executescript('''
       CREATE TABLE IF NOT EXISTS meal_schedule(
         user_id INTEGER NOT NULL, day TEXT NOT NULL, workload TEXT NOT NULL DEFAULT 'normal',eva_hours REAL NOT NULL DEFAULT 0,
-        note TEXT DEFAULT '', set_by TEXT DEFAULT 'OrbitLife schedule', PRIMARY KEY(user_id,day), FOREIGN KEY(user_id) REFERENCES users(id));
+        note TEXT DEFAULT '', set_by TEXT DEFAULT 'PulseDeck schedule', PRIMARY KEY(user_id,day), FOREIGN KEY(user_id) REFERENCES users(id));
       CREATE TABLE IF NOT EXISTS meal_plans(
         id INTEGER PRIMARY KEY, user_id INTEGER NOT NULL, day TEXT NOT NULL,slot TEXT NOT NULL,
         items_json TEXT NOT NULL, calories INTEGER NOT NULL, protein_g REAL NOT NULL,carbs_g REAL NOT NULL,fat_g REAL NOT NULL,

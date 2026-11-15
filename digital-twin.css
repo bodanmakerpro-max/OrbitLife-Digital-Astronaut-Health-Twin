@@ -1,4 +1,4 @@
-/* OrbitLife Digital Twin 20.0: isolated styles compatible with existing themes */
+/* PulseDeck Digital Twin 20.0: isolated styles compatible with existing themes */
 .twin-nav-new{font-size:8px;font-weight:900;letter-spacing:.1em;padding:2px 5px;border:1px solid #238ca8;border-radius:4px;color:#64e4f0;margin-left:auto}
 .twin-view{--tw-text:#e7f7ff;--tw-muted:#9bbbd0;--tw-ice:#4adfea;--tw-edge:rgba(92,176,206,.24);color:var(--tw-text)}
 .twin-view .twin-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:1.5fr .7fr;min-height:245px;border:1px solid #28657b;border-radius:20px;padding:34px 35px;background:radial-gradient(ellipse at 85% 48%,#17687f66,transparent 55%),linear-gradient(135deg,#102c3e,#091725 70%);box-shadow:0 20px 40px #0003}

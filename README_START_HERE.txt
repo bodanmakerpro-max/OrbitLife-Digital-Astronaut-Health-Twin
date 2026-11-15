@@ -1,7 +1,7 @@
-ORBITLIFE 20.0 | DIGITAL TWIN + MOOD & ALERTNESS
+PULSEDECK 20.0 | DIGITAL TWIN + MOOD & ALERTNESS
 See README.md for updated installation and medical-safety information.
 
-ORBITLIFE 19.2  |  OLED + RFID AUTO LOGIN + ESP32 SETUP ON WELCOME
+PULSEDECK 19.2  |  OLED + RFID AUTO LOGIN + ESP32 SETUP ON WELCOME
 
 1. Распакувајте го пакетот во нова папка.
 2. Во Windows отворете CMD во оваа папка.
@@ -25,7 +25,7 @@ ORBITLIFE 19.2  |  OLED + RFID AUTO LOGIN + ESP32 SETUP ON WELCOME
 
 Демо податоците и лозинките не се соодветни за реална медицинска употреба.
 
-ORBITLIFE 19.2 FIXES
+PULSEDECK 19.2 FIXES
 - General Quick AI floating button restored at bottom-left on Welcome and all app pages.
 - General Quick AI uses /api/quick-ai; offline mode works without API credits.
 - Personal health AI remains in the private menu for logged-in users.

@@ -13,7 +13,7 @@ Pundyavana, Gilad, Stahn and Basner (2023), *Cognition Test Battery Survey: Deve
 1. Each astronaut gets a private view of **existing** SQLite data from daily check-ins, wearable-style reports, radiation logs, nutrition, cortisol, symptom logs, medications and self-reported mood.
 2. Charts show stored observations only, with sample count and source label. The reference baseline is the median of at least three earlier readings (up to seven). It is a descriptive comparison, not a medical safe range.
 3. Quick mood check-in asks five questions. The extended check-in adds nine, covering workload, sickness, exhaustion, tiredness, low mood, boredom, loneliness, monotony and crew conflicts. Ratings are framed so 0 means low difficulty and 10 means high difficulty. The optional crew conflict item has 0 or 10 only.
-4. **OrbitLife prototype index = 100 − 10 × arithmetic mean(answered questions)**, rounded to one decimal. Every item in a selected mode must be answered. This is *not* a weighted AMS score and is *not comparable* between Quick and Detailed modes without additional validation. Its display is limited to describing the user's self-report.
+4. **PulseDeck prototype index = 100 − 10 × arithmetic mean(answered questions)**, rounded to one decimal. Every item in a selected mode must be answered. This is *not* a weighted AMS score and is *not comparable* between Quick and Detailed modes without additional validation. Its display is limited to describing the user's self-report.
 5. The offline personal assistant can summarize saved check-ins on request. Connected AI includes the new records only after the user explicitly selects Connected AI.
 
 ## What is not implemented

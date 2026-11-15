@@ -1,4 +1,4 @@
-/* OrbitLife 20.0 Personal Digital Twin. Uses existing authenticated local APIs. */
+/* PulseDeck 20.0 Personal Digital Twin. Uses existing authenticated local APIs. */
 (() => {
   'use strict';
   const byId = id => document.getElementById(id);

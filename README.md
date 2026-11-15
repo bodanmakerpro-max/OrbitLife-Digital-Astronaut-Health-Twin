@@ -1,8 +1,8 @@
-# OrbitLife 20.0 | Personal Digital Twin
+# PulseDeck 20.2 | Personal Digital Twin
 
 **Educational NASA Space Apps 2026 demo**, not NASA or ISS medical software. The astronaut crew and seeded health readings are fictional.
 
-OrbitLife combines local health check-ins, mission nutrition, symptom reports, emergency cards, medications, radiation and cortisol logs, wearable-style records, RFID + ESP32 shortcuts, and two AI modes. Version 20 adds a personal Digital Twin for each of the eight astronauts and a new Cognition-inspired mood and alertness survey.
+PulseDeck combines local health check-ins, mission nutrition, symptom reports, emergency cards, medications, radiation and cortisol logs, wearable-style records, RFID + ESP32 shortcuts, and two AI modes. Version 20 adds a personal Digital Twin for each of the eight astronauts and a new Cognition-inspired mood and alertness survey.
 
 ## Run locally (Windows)
 
@@ -14,7 +14,7 @@ OrbitLife combines local health check-ins, mission nutrition, symptom reports, e
 
 On a fresh demo database, use `astro01` / `Bodan1` to sign in as the first fictional crew member. Change this password if you keep the database. Demo passwords are never suitable for real medical records.
 
-If you already have OrbitLife installed, **back up your `orbitlife_data.sqlite3` first**, then replace only the program files. Never overwrite or publish your existing SQLite database, RFID card mappings, or API key. The new mood table is added automatically when the server first starts.
+If you already have PulseDeck installed, **back up your `orbitlife_data.sqlite3` first**, then replace only the program files. Never overwrite or publish your existing SQLite database, RFID card mappings, or API key. The new mood table is added automatically when the server first starts.
 
 ## What's new
 
@@ -51,7 +51,12 @@ The physical ESP32/RC522, clinical validity, medical devices and full visual beh
 - User-supplied *Space Health App.pdf*, pages 1–3 (lunar South Pole scenario and risk-topic outline).
 - See [`DIGITAL_TWIN_RESEARCH_NOTES.md`](DIGITAL_TWIN_RESEARCH_NOTES.md) for exact limitations.
 
-## Space Apps 2026 presentation
+## Branding and presentation (2026)
 
-The seven-slide team presentation is available as a PDF:
-[OrbitLife NASA Space Apps 2026 - 7 slides](presentations/OrbitLife_Space_Apps_2026_7_Slides.pdf).
+The project is now called **PulseDeck** (formerly OrbitLife). The app UI, ESP32 OLED display, documents and presentation have been updated. The original local SQLite database, USB JSON event protocol, and Python module filenames stay compatible so an existing installation keeps its records.
+
+The seven-slide Space Apps presentation is in [presentations/PulseDeck_Space_Apps_2026_7_Slides.pdf](presentations/PulseDeck_Space_Apps_2026_7_Slides.pdf). The longer editable deck is [presentations/PulseDeck_Health_Monitoring_22_Slides.pptx](presentations/PulseDeck_Health_Monitoring_22_Slides.pptx).
+
+Brand assets are under `assets/`. For Windows launch `start_pulsedeck.bat` or `py -3.13 server.py`.
+
+Note: PulseDeck is also used by unrelated public software projects. The name has not been trademark-cleared.

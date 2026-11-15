@@ -1,10 +1,10 @@
-/* OrbitLife 20.1 - ESP32 Smart Mission Terminal (USB, OLED, RFID, encoder)
+/* PulseDeck 20.1 - ESP32 Smart Mission Terminal (USB, OLED, RFID, encoder)
    Board: classic ESP32 DevKit / WROOM-32.
    OLED 0.96 SSD1306 I2C: SDA=16 SCL=17 VCC=3.3V GND=GND
    RC522 SPI: SS=21 SCK=18 MISO=19 MOSI=23 RST=22 3V3 and GND
    KY-040 encoder: CLK=32 DT=33 SW=25, +=3V3, GND=GND
    Libraries: U8g2, MFRC522. NO Wi-Fi, NO LCD parallel wiring.
-   Paired cards can authorize a session on the local OrbitLife Python server.
+   Paired cards can authorize a session on the local PulseDeck Python server.
    The ESP32 only reports the UID and never stores or transmits passwords.
    Serial protocol: newline delimited JSON, 115200 baud.
 */
@@ -121,7 +121,7 @@ void draw(){
   lastDraw=millis();
   display.clearBuffer();
   display.setFont(u8g2_font_6x13_t_cyrillic);
-  display.drawUTF8(1,11,"ORBITLIFE");
+  display.drawUTF8(1,11,"PULSEDECK");
   display.setCursor(95,11);display.print(timeText);
   display.drawHLine(0,15,128);
   if(screen==BROWSE){

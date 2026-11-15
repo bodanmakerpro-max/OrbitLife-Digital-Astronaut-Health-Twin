@@ -1,5 +1,5 @@
  'use strict';
-/* OrbitLife 17: account-specific interface translation. Never translates typed health records. */
+/* PulseDeck 17: account-specific interface translation. Never translates typed health records. */
 (()=>{
   const additions={
  "mk": {
@@ -159,7 +159,7 @@
   "Connected AI (requires API credits)": "Поврзана вештачка интелигенција (потребни се кредити)",
   "Offline Quick AI": "Општ помошник без интернет",
   "Mode": "Режим",
-  "Ask about today's menu, nutrition, radiation or using OrbitLife.": "Прашај за денешното мени, исхрана, зрачење или користењето на OrbitLife.",
+  "Ask about today's menu, nutrition, radiation or using PulseDeck.": "Прашај за денешното мени, исхрана, зрачење или користењето на PulseDeck.",
   "Emergency": "Итно",
   "Emergency access": "Итен пристап",
   "Report an emergency": "Пријави итен случај",
@@ -406,11 +406,11 @@
   "USB RFID SUPPORT": "ПОДДРШКА ЗА БЕСКОНТАКТНИ КАРТИЧКИ",
   "TOUCH + ENCODER": "ЕКРАН НА ДОПИР И ВРТЛИВО КОПЧЕ",
   "USB ACCESS · NO LCD REQUIRED": "ПРИСТАП ПРЕКУ УСБ · НЕ Е ПОТРЕБЕН ПОСЕБЕН ДИСПЛЕЈ",
-  "ORBITLIFE · CREW HEALTH": "ORBITLIFE · ЗДРАВЈЕ НА ЕКИПАЖОТ",
+  "PULSEDECK · CREW HEALTH": "PULSEDECK · ЗДРАВЈЕ НА ЕКИПАЖОТ",
   "Crew overview": "Преглед на екипажот",
   "Sign in to a private account": "Најави се на лична сметка",
   "Crew health platform": "Платформа за здравјето на екипажот",
-  "ORBITLIFE / EXPEDITION 01": "ORBITLIFE / ЕКСПЕДИЦИЈА 01",
+  "PULSEDECK / EXPEDITION 01": "PULSEDECK / ЕКСПЕДИЦИЈА 01",
   "Mission commander · AST-001": "Командир на мисијата · AST-001",
   "Mission Monitor": "Надзор на мисијата",
   "Crew profile": "Профил на член од екипажот",
@@ -604,7 +604,7 @@
   "Connected AI (requires API credits)": "Intelligence artificielle connectée (crédits requis)",
   "Offline Quick AI": "Assistant général hors ligne",
   "Mode": "Mode",
-  "Ask about today's menu, nutrition, radiation or using OrbitLife.": "Posez une question sur les repas, la nutrition ou les radiations.",
+  "Ask about today's menu, nutrition, radiation or using PulseDeck.": "Posez une question sur les repas, la nutrition ou les radiations.",
   "Emergency": "Urgence",
   "Emergency access": "Accès d’urgence",
   "Report an emergency": "Signaler une urgence",
@@ -851,11 +851,11 @@
   "USB RFID SUPPORT": "LECTEUR DE CARTES SANS CONTACT",
   "TOUCH + ENCODER": "ÉCRAN TACTILE ET MOLETTE",
   "USB ACCESS · NO LCD REQUIRED": "ACCÈS USB · AUCUN ÉCRAN SUPPLÉMENTAIRE REQUIS",
-  "ORBITLIFE · CREW HEALTH": "ORBITLIFE · SANTÉ DE L’ÉQUIPAGE",
+  "PULSEDECK · CREW HEALTH": "PULSEDECK · SANTÉ DE L’ÉQUIPAGE",
   "Crew overview": "Présentation de l’équipage",
   "Sign in to a private account": "Se connecter à un compte privé",
   "Crew health platform": "Plateforme de santé de l’équipage",
-  "ORBITLIFE / EXPEDITION 01": "ORBITLIFE / EXPÉDITION 01",
+  "PULSEDECK / EXPEDITION 01": "PULSEDECK / EXPÉDITION 01",
   "Mission commander · AST-001": "Commandant de mission · AST-001",
   "Mission Monitor": "Suivi de mission",
   "Crew profile": "Profil d’équipage",
@@ -1049,7 +1049,7 @@
   "Connected AI (requires API credits)": "Подключённый ИИ (нужны средства)",
   "Offline Quick AI": "Общий автономный помощник",
   "Mode": "Режим",
-  "Ask about today's menu, nutrition, radiation or using OrbitLife.": "Спросите о меню, питании, радиации или приложении.",
+  "Ask about today's menu, nutrition, radiation or using PulseDeck.": "Спросите о меню, питании, радиации или приложении.",
   "Emergency": "Экстренно",
   "Emergency access": "Экстренный доступ",
   "Report an emergency": "Сообщить о происшествии",
@@ -1296,11 +1296,11 @@
   "USB RFID SUPPORT": "ПОДДЕРЖКА БЕСКОНТАКТНЫХ КАРТ",
   "TOUCH + ENCODER": "СЕНСОРНЫЙ ЭКРАН И РУЧКА",
   "USB ACCESS · NO LCD REQUIRED": "ДОСТУП ЧЕРЕЗ USB · ОТДЕЛЬНЫЙ ЭКРАН НЕ НУЖЕН",
-  "ORBITLIFE · CREW HEALTH": "ORBITLIFE · ЗДОРОВЬЕ ЭКИПАЖА",
+  "PULSEDECK · CREW HEALTH": "PULSEDECK · ЗДОРОВЬЕ ЭКИПАЖА",
   "Crew overview": "Обзор экипажа",
   "Sign in to a private account": "Войти в личную учётную запись",
   "Crew health platform": "Платформа здоровья экипажа",
-  "ORBITLIFE / EXPEDITION 01": "ORBITLIFE / ЭКСПЕДИЦИЯ 01",
+  "PULSEDECK / EXPEDITION 01": "PULSEDECK / ЭКСПЕДИЦИЯ 01",
   "Mission commander · AST-001": "Командир миссии · AST-001",
   "Mission Monitor": "Контроль миссии",
   "Crew profile": "Профиль члена экипажа",
@@ -1417,10 +1417,10 @@
       // Keep the RFID information sentence in sync with the selected language.
       const rfidNote=document.querySelector('.ol-launch-small');
       if(rfidNote){const key='Scan a paired RFID card for automatic sign-in. You can also use your password.';const translated=textIn(key,loc);if(rfidNote.textContent!==translated)rfidNote.textContent=translated;}
-      if(loc==='mk')document.title='OrbitLife | Здравје на екипажот';
-      else if(loc==='fr')document.title='OrbitLife | Santé de l’équipage';
-      else if(loc==='ru')document.title='OrbitLife | Здоровье экипажа';
-      else document.title='OrbitLife | Crew Command';
+      if(loc==='mk')document.title='PulseDeck | Здравје на екипажот';
+      else if(loc==='fr')document.title='PulseDeck | Santé de l’équipage';
+      else if(loc==='ru')document.title='PulseDeck | Здоровье экипажа';
+      else document.title='PulseDeck | Crew Command';
     }finally{working=false;}
   }
   let pending=false;

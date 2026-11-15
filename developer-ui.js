@@ -1,5 +1,5 @@
 'use strict';
-/* OrbitLife Developer Tools. Only the authenticated commander can modify settings or delete records. */
+/* PulseDeck Developer Tools. Only the authenticated commander can modify settings or delete records. */
 (()=>{
   const el=id=>document.getElementById(id);
   const val=id=>el(id)?.value;

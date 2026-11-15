@@ -1,5 +1,5 @@
 'use strict';
-/* OrbitLife 10: global emergency access, account preferences, incident photos, cortisol.
+/* PulseDeck 10: global emergency access, account preferences, incident photos, cortisol.
    Connected data stays local to the Python server, except when user explicitly enables connected AI. */
 (() => {
   const q=id=>document.getElementById(id);
@@ -355,7 +355,7 @@
   Object.assign(dictionary.ru,{
     "Quick AI":"Быстрый ИИ",
     "General questions. No private health data is shared.":"Общие вопросы. Личные медицинские данные не передаются.",
-    "Ask about OrbitLife, the ISS, radiation, food or daily routines.":"Спросите об OrbitLife, МКС, радиации, питании или распорядке дня.",
+    "Ask about PulseDeck, the ISS, radiation, food or daily routines.":"Спросите об PulseDeck, МКС, радиации, питании или распорядке дня.",
     "Ask Quick AI":"Спросить ИИ",
     "Mode":"Режим",
     "Offline answers":"Офлайн-ответы",
@@ -692,7 +692,7 @@
     setOwnerStatus();
   };
   const realUpdateAuth=updateAuth;
-  updateAuth=function(...args){const v=realUpdateAuth(...args);updateWithUser().catch(e=>console.error('OrbitLife prefs',e));return v;};
+  updateAuth=function(...args){const v=realUpdateAuth(...args);updateWithUser().catch(e=>console.error('PulseDeck prefs',e));return v;};
   const reloadOriginal=reloadCrew;
   reloadCrew=async function(...args){const res=await reloadOriginal(...args);await updateWithUser();return res;};
   const ldr=loadProfile;

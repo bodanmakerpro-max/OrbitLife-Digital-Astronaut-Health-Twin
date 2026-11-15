@@ -1,4 +1,4 @@
-/* OrbitLife ESP32 kiosk events; touchscreen stays fully usable. */
+/* PulseDeck ESP32 kiosk events; touchscreen stays fully usable. */
 (() => {
   'use strict';
   let lastEvent = 0;

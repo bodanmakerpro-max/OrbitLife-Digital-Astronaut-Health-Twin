@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""OrbitLife 19 isolated integration checks: synthetic accounts and temporary database only.
+"""PulseDeck 19 isolated integration checks: synthetic accounts and temporary database only.
 Run from any directory: py -3.13 qa/smoke_test.py
 """
 import contextlib
@@ -71,7 +71,7 @@ def run():
             status, crew = request('/api/crew')
             check('8 профили и имиња',status==200 and len(crew['crew'])==8 and crew['crew'][0]['name']=='Bodan' and crew['crew'][2]['name']=='Petar')
             status, homepage = request('/')
-            check('почетна страница',status==200 and b'OrbitLife' in homepage)
+            check('почетна страница',status==200 and b'PulseDeck' in homepage)
             for js in ['app.js','localization.js','launch-ui.js','alerts-ui.js','enhancements.js','terminal-ui.js','developer-ui.js','welcome-esp.js']:
                 check('ресурс '+js, request('/'+js)[0]==200)
             status, alerts = request('/api/public-alerts')
@@ -125,7 +125,7 @@ def run():
                 return struct.pack('>I',len(payload))+kind+payload+struct.pack('>I',zlib.crc32(kind+payload)&0xffffffff)
             png=(b'\x89PNG\r\n\x1a\n'
                  +png_chunk(b'IHDR',struct.pack('>IIBBBBB',2,2,8,6,0,0,0))
-                 +png_chunk(b'tEXt',b'Comment\x00OrbitLife release test image')
+                 +png_chunk(b'tEXt',b'Comment\x00PulseDeck release test image')
                  +png_chunk(b'IDAT',zlib.compress(b'\x00'+b'\x00\xB0\xF0\xFF'*2+b'\x00'+b'\x00\xB0\xF0\xFF'*2))
                  +png_chunk(b'IEND',b''))
             assert len(png)>100 and png.endswith(b'\xaeB`\x82')

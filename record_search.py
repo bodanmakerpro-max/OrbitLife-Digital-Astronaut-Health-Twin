@@ -1,4 +1,4 @@
-"""Read-only, account-scoped combined medical history search for OrbitLife."""
+"""Read-only, account-scoped combined medical history search for PulseDeck."""
 import datetime as dt
 
 TOPICS=('all','daily','wearable','radiation','symptoms','medications','nutrition','cortisol','incidents')

@@ -1,5 +1,5 @@
 'use strict';
-/* OrbitLife 11: mission-focused quick navigation, accessible crew-wide AI, efficient entry. */
+/* PulseDeck 11: mission-focused quick navigation, accessible crew-wide AI, efficient entry. */
 (() => {
   const $=id=>document.getElementById(id);
   const icons={
@@ -87,7 +87,7 @@
   }
   function translateCommandBar(){document.querySelectorAll('[data-cmd-key]').forEach(el=>{el.textContent=l(el.dataset.cmdKey);});}
   function createCommandPalette(){
-    const dialog=document.createElement('div');dialog.id='olCommandPalette';dialog.className='ol-command-overlay hidden';dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-label','Find an OrbitLife page');
+    const dialog=document.createElement('div');dialog.id='olCommandPalette';dialog.className='ol-command-overlay hidden';dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-label','Find an PulseDeck page');
     dialog.innerHTML=`<div class="ol-command-dialog"><label>${svg('search')}<input id="olCommandSearch" type="search" autocomplete="off" placeholder="Search pages or actions" aria-label="Search pages and actions"></label><div id="olCommandItems" role="listbox" aria-label="Pages"></div><footer><span>↑ ↓ Navigate</span><span>Enter Open</span><span>Esc Close</span></footer></div>`;
     document.body.append(dialog);
     $('olCommandSearch').addEventListener('input',()=>{selectedCommand=0;renderCommands();});

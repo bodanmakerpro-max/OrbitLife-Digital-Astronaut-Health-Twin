@@ -26,7 +26,7 @@ def topic_for(question):
 
 RESPONSES={
  'mk':{
-  'hello':'Здраво. Јас сум општиот помошник на OrbitLife. Можеш да ме прашаш за дневното мени, пријавување мерења, зрачење или работата со апликацијата. Немам пристап до личните медицински записи.',
+  'hello':'Здраво. Јас сум општиот помошник на PulseDeck. Можеш да ме прашаш за дневното мени, пријавување мерења, зрачење или работата со апликацијата. Немам пристап до личните медицински записи.',
   'radiation':'Изложеноста на зрачење се следи преку примена доза во милисиверти и јачина на дозата во микросиверти на час. За вистинско мерење е потребен соодветен дозиметар. Необичните вредности треба да ги провери медицинскиот тим според правилата на мисијата.',
   'cortisol':'Резултатите од мерење кортизол во плунка зависат од времето поминато по будењето. Споредувај примероци земени во слично време и користи го референтниот опсег од лабораторијата. Отстапувањата треба да ги разгледа медицинско лице.',
   'sleep':'Запишувај ги часовите сон и следи го распоредот на мисијата. Ако проблемите со спиењето се повторуваат, разговарај со медицинскиот тим.',
@@ -37,10 +37,10 @@ RESPONSES={
   'garmin':'Податоците од носливите уреди во оваа верзија се симулирани. Поврзување со вистински часовник бара овластен пристап и согласност на корисникот.',
   'rfid':'Картичката за бесконтактна идентификација го избира профилот на астронаутот. За отворање приватни здравствени записи и понатаму е потребна лозинка.',
   'help':'Користи го главното мени за дневна проверка, исхрана, зрачење, лекови и историја на записи. Црвеното копче „Итно“ е достапно на секоја страница.',
-  'fallback':'Офлајн помошникот одговара на општи прашања за OrbitLife, мисијата, исхраната и здравствените мерења. За пошироки прашања е потребна поврзана вештачка интелигенција со активен пристап. Личните медицински записи не се користат.'
+  'fallback':'Офлајн помошникот одговара на општи прашања за PulseDeck, мисијата, исхраната и здравствените мерења. За пошироки прашања е потребна поврзана вештачка интелигенција со активен пристап. Личните медицински записи не се користат.'
  },
  'fr':{
-  'hello':"Bonjour. Je suis l’assistant général d’OrbitLife. Vous pouvez me poser des questions sur les repas, les mesures quotidiennes, les radiations et l’utilisation de l’application. Je n’accède pas aux dossiers médicaux privés.",
+  'hello':"Bonjour. Je suis l’assistant général d’PulseDeck. Vous pouvez me poser des questions sur les repas, les mesures quotidiennes, les radiations et l’utilisation de l’application. Je n’accède pas aux dossiers médicaux privés.",
   'radiation':"L’exposition est suivie par la dose en millisieverts et le débit de dose en microsieverts par heure. Un dosimètre adapté est nécessaire pour toute mesure réelle. Les résultats inhabituels doivent être examinés selon les procédures de la mission.",
   'cortisol':"Le taux de cortisol salivaire dépend du temps écoulé depuis le réveil. Comparez les prélèvements effectués à des moments similaires et utilisez les valeurs de référence du laboratoire. Tout écart nécessite un avis médical.",
   'sleep':"Consignez la durée du sommeil et respectez l’emploi du temps de la mission. En cas de troubles répétés, consultez l’équipe médicale.",
@@ -51,10 +51,10 @@ RESPONSES={
   'garmin':"Les données des appareils portables sont actuellement simulées. Une synchronisation réelle nécessite un accès autorisé et le consentement de la personne.",
   'rfid':"Une carte d’identification sans contact sélectionne le profil de l’astronaute. Un mot de passe reste nécessaire pour consulter les données médicales privées.",
   'help':"Utilisez le menu pour le suivi quotidien, les repas, les radiations, les médicaments et l’historique. Le bouton rouge « Urgence » reste disponible sur chaque page.",
-  'fallback':"L’assistant hors ligne répond aux questions générales sur OrbitLife, la mission, l’alimentation et les mesures de santé. Pour d’autres sujets, un service d’intelligence artificielle connecté est nécessaire. Aucun dossier médical privé n’est utilisé."
+  'fallback':"L’assistant hors ligne répond aux questions générales sur PulseDeck, la mission, l’alimentation et les mesures de santé. Pour d’autres sujets, un service d’intelligence artificielle connecté est nécessaire. Aucun dossier médical privé n’est utilisé."
  },
  'ru':{
-  'hello':'Здравствуйте. Я общий помощник OrbitLife. Вы можете спросить о меню, ежедневных измерениях, радиации или использовании приложения. Я не имею доступа к личным медицинским записям.',
+  'hello':'Здравствуйте. Я общий помощник PulseDeck. Вы можете спросить о меню, ежедневных измерениях, радиации или использовании приложения. Я не имею доступа к личным медицинским записям.',
   'radiation':'Воздействие радиации отслеживается по дозе в миллизивертах и мощности дозы в микрозивертах в час. Для реального измерения нужен исправный дозиметр. Необычные значения следует проверять по утверждённым правилам миссии.',
   'cortisol':'Показатели кортизола в слюне зависят от времени после пробуждения. Сравнивайте образцы, взятые в сопоставимые периоды, и используйте лабораторные референсные значения. Отклонения требуют медицинской оценки.',
   'sleep':'Записывайте продолжительность сна и соблюдайте расписание миссии. Если нарушения повторяются, обратитесь к медицинскому экипажу.',
@@ -65,7 +65,7 @@ RESPONSES={
   'garmin':'Данные носимых устройств пока смоделированы. Настоящая синхронизация требует авторизованного доступа и согласия пользователя.',
   'rfid':'Бесконтактная карта выбирает аккаунт астронавта. Для доступа к личным медицинским записям по-прежнему нужен пароль.',
   'help':'Используйте меню для ежедневных проверок, питания, радиации, лекарств и истории записей. Красная кнопка «Экстренно» доступна на всех страницах.',
-  'fallback':'Автономный помощник отвечает на общие вопросы об OrbitLife, миссии, питании и показателях здоровья. Для других тем требуется подключённый искусственный интеллект. Личные медицинские записи не используются.'
+  'fallback':'Автономный помощник отвечает на общие вопросы об PulseDeck, миссии, питании и показателях здоровья. Для других тем требуется подключённый искусственный интеллект. Личные медицинские записи не используются.'
  }
 }
 

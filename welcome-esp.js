@@ -1,4 +1,4 @@
-/* OrbitLife 19.1: USB setup before login, using the local Python bridge. */
+/* PulseDeck 19.1: USB setup before login, using the local Python bridge. */
 (() => {
   'use strict';
   const el=id=>document.getElementById(id);

@@ -1,5 +1,5 @@
 'use strict';
-/* OrbitLife 19: single touch + encoder menu shared by OLED and browser.
+/* PulseDeck 19: single touch + encoder menu shared by OLED and browser.
    Paired RFID cards authenticate through the server; older unpaired demo scans only select a profile. */
 (()=>{
   const q=id=>document.getElementById(id);
