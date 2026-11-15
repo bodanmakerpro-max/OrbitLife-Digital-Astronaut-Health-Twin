@@ -11,7 +11,7 @@
 
 </div>
 
-> **Important:** Download the current ZIP using the link above or GitHub's green **Code → Download ZIP** button. The older `OrbitLife-Digital-Astronaut-Health-Twin-main.zip` stored in this repository is a legacy snapshot and may not contain the latest changes.
+> **Important:** Always download the latest project ZIP using the link above or GitHub's green **Code → Download ZIP** button. Old packaged ZIP copies have been removed to avoid confusion.
 
 ## Quick start (Windows)
 
